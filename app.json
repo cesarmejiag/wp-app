@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "wp-mobile",
-    "slug": "wp-mobile",
+    "name": "Wiskipix App",
+    "slug": "wiskipix-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,6 +21,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Las fotos en papel son un recuerdo para toda la vida. Te ayudamos a conservar esos momentos imprimiendo tus fotos.",
+    "githubUrl": "https://github.com/cesarmejiag/wp-app"
   }
 }
