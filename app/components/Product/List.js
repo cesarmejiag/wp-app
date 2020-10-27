@@ -8,14 +8,14 @@ import {
 import Item from "./Item"
 
 function List(props) {
-    const { items, onPress } = props
+    const { items, title, onPress } = props
 
     return (
         <SafeAreaView>
             <SectionList
                 renderItem={({ item }) => <Item data={item} onPress={onPress} />}
                 keyExtractor={(item) => item.id}
-                sections={[{ title: 'Productos', data: items }]}
+                sections={[{ title: title, data: items }]}
                 renderSectionHeader={({ section: { title } }) => (
                     <Text style={styles.title}>{title}</Text>
                 )} />

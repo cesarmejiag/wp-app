@@ -9,8 +9,10 @@ import {
 
 function Item(props) {
     const { data, onPress } = props
-    const { id, name, main_photo_path } = data
-    const handlePress = () => { onPress(id) }
+    const { name, main_photo_path } = data
+    const handlePress = () => {
+        onPress(data) 
+    }
 
     return (
         <View style={styles.view}>

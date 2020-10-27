@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import CategoryList from './../screens/Products/CategoryList'
 import ProductList from './../screens/Products/ProductList'
 import ProductDetail from './../screens/Products/ProductDetail'
+import ProductProcess from './../screens/Products/ProductProcess'
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,10 @@ function ProductStack() {
                 name="product-detail"
                 component={ProductDetail}
                 options={{ title: 'Detalle de Producto' }} />
+            <Stack.Screen
+                name="product-process"
+                component={ProductProcess}
+                options={{ title: 'Proceso' }} />
         </Stack.Navigator>
     );
 }

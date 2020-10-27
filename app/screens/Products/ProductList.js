@@ -5,16 +5,18 @@ import Fetch from './../../utils/Fetch'
 import Loader from './../../components/Loader'
 import { useNavigation } from '@react-navigation/native'
 
-function ProductList() {
+function ProductList({ route }) {
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
+    const { id, name } = route.params.categoryData
     const navigation = useNavigation()
-    const onPress = () => {
-        navigation.navigate('product-detail')
+
+    const onPress = (productData) => {
+        navigation.navigate('product-detail', { productData })
     }
 
     useEffect(() => {
-        Fetch.get('https://floating-lake-44715.herokuapp.com/api/v1/products')
+        Fetch.get(`https://floating-lake-44715.herokuapp.com/api/v1/products?page_size=15&page=1&category_id=${id}`)
             .then(products => {
                 setProducts(products.data)
                 setLoading(false);
@@ -27,7 +29,7 @@ function ProductList() {
 
     return (
         <View>
-            <List items={products} onPress={onPress} />
+            <List title={name} items={products} onPress={onPress} />
         </View>
     )
 }
