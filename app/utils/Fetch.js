@@ -9,7 +9,7 @@ class Fetch {
             const headers = new Headers()
             const options = { }
 
-            headers.append("Authorization", "Bearer xbRAvAOJjbUrfgmI9Yy2fhFhHosj35Ggf0hzbpSF")
+            headers.append("Authorization", "Bearer 1|NvwPrPSHsY2GTnLKfBh5jh4w80AnY5OrHsT0U6tU")
 
             options['method'] = method
             options['headers'] = headers
