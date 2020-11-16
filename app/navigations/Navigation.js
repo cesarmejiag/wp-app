@@ -5,6 +5,7 @@ import { Icon } from 'react-native-elements'
 import ProductStack from '../navigations/ProductStack'
 import ProfileStack from '../navigations/ProfileStack'
 import CartStack from '../navigations/CartStack'
+import { tabNavigator } from './../Styles'
 
 // References:
 // Navigation - https://reactnavigation.org/
@@ -12,16 +13,16 @@ import CartStack from '../navigations/CartStack'
 
 const Tab = createBottomTabNavigator();
 
-function Navigation() {
+export default function Navigation() {
     return (
         <NavigationContainer>
             <Tab.Navigator
                 initialRouteName="product-list"
                 tabBarOptions={{
-                    activeTintColor: "#717171",
-                    activeBackgroundColor: "#D8D8D8",
-                    inactiveTintColor: "#717171",
-                    inactiveBackgroundColor: "#BABABA"
+                    activeTintColor: tabNavigator.color,
+                    activeBackgroundColor: tabNavigator.backgroundColor,
+                    inactiveTintColor: tabNavigator.color,
+                    inactiveBackgroundColor: tabNavigator.backgroundColor,
                 }}
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ color }) => screenOptions(route, color)
@@ -29,15 +30,15 @@ function Navigation() {
                 <Tab.Screen
                     name="product-list"
                     component={ProductStack}
-                    options={{ title: 'Inicio' }} />
+                    options={{ title: 'INICIO' }} />
                 <Tab.Screen
                     name="profile"
                     component={ProfileStack}
-                    options={{ title: 'Mi perfil' }} />
+                    options={{ title: 'MI PERFIL' }} />
                 <Tab.Screen
                     name="cart"
                     component={CartStack}
-                    options={{ title: 'Carrito' }} />
+                    options={{ title: 'CARRITO' }} />
             </Tab.Navigator>
         </NavigationContainer>
     );
@@ -61,8 +62,6 @@ function screenOptions(route, color) {
     }
 
     return (
-        <Icon type="material-community" name={iconName} size={22} color={color} />
+        <Icon type="material-community" name={iconName} size={25} color={tabNavigator.iconColor} />
     )
 }
-
-export default Navigation;
