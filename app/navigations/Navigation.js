@@ -5,7 +5,6 @@ import { Icon } from 'react-native-elements'
 import ProductStack from '../navigations/ProductStack'
 import ProfileStack from '../navigations/ProfileStack'
 import CartStack from '../navigations/CartStack'
-import { tabNavigator } from './../Styles'
 
 // References:
 // Navigation - https://reactnavigation.org/
@@ -19,10 +18,10 @@ export default function Navigation() {
             <Tab.Navigator
                 initialRouteName="product-list"
                 tabBarOptions={{
-                    activeTintColor: tabNavigator.color,
-                    activeBackgroundColor: tabNavigator.backgroundColor,
-                    inactiveTintColor: tabNavigator.color,
-                    inactiveBackgroundColor: tabNavigator.backgroundColor,
+                    activeTintColor: "#717171",
+                    activeBackgroundColor: "#ffffff",
+                    inactiveTintColor: "#717171",
+                    inactiveBackgroundColor: "#ffffff",
                 }}
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ color }) => screenOptions(route, color)
@@ -30,15 +29,15 @@ export default function Navigation() {
                 <Tab.Screen
                     name="product-list"
                     component={ProductStack}
-                    options={{ title: 'INICIO' }} />
+                    options={{ title: 'Inicio' }} />
                 <Tab.Screen
                     name="profile"
                     component={ProfileStack}
-                    options={{ title: 'MI PERFIL' }} />
+                    options={{ title: 'Mi Perfil' }} />
                 <Tab.Screen
                     name="cart"
                     component={CartStack}
-                    options={{ title: 'CARRITO' }} />
+                    options={{ title: 'Carrito' }} />
             </Tab.Navigator>
         </NavigationContainer>
     );
@@ -62,6 +61,6 @@ function screenOptions(route, color) {
     }
 
     return (
-        <Icon type="material-community" name={iconName} size={25} color={tabNavigator.iconColor} />
+        <Icon type="material-community" name={iconName} size={25} color={"#3241F0"} />
     )
 }
