@@ -1,18 +1,18 @@
-import * as firebase from 'firebase';
+import * as firebase from 'firebase'
 import React, { useState, useEffect } from 'react'
 import Loader from './../../components/Loader'
 import UserGuest from './UserGuest'
 import UserLogged from './UserLogged'
 
-function Profile() {
-    const [logged, setLogged] = useState(false);
-    const [loading, setLoading] = useState(true);
+export default Profile = () => {
+    const [logged, setLogged] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(user => {
-            setLogged(!!user);
-            setLoading(false);
-        });
+            setLogged(!!user)
+            setLoading(false)
+        })
     }, [])
 
     if (loading) {
@@ -21,5 +21,3 @@ function Profile() {
 
     return logged ? <UserLogged /> : <UserGuest />
 }
-
-export default Profile

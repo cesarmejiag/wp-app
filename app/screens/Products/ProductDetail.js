@@ -10,8 +10,11 @@ import { Button } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 
 function ProductDetail({ route }) {
-    const { name, description, main_photo_path } = route.params.productData
+    const { id, name, description, main_photo_path } = route.params.productData
     const navigation = useNavigation()
+    const onPress = () => {
+        navigation.navigate('product-process', { id })
+    }
 
     return (
         <ScrollView style={styles.view}>
@@ -28,9 +31,7 @@ function ProductDetail({ route }) {
                 <Button
                     title="Crear"
                     buttonStyle={styles.button}
-                    onPress={() => {
-                        navigation.navigate('product-process')
-                    }} />
+                    onPress={onPress} />
             </View>
         </ScrollView>
     )

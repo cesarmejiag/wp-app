@@ -7,12 +7,34 @@ import {
 import { Button } from 'react-native-elements'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-const ProductProcess = () => {
+const ProductProcess = ({ route }) => {
+    const onPress = async () => {
+        try {
+            const { id } = route.params.id
+
+            // Retrieve cart products.
+            let productsStr = await AsyncStorage.getItem('cart-products')
+            let products
+
+            if (!productsStr) {
+                products = []
+            } else {
+                products = JSON.parse(productsStr)
+            }
+
+            products.push(id)
+            AsyncStorage.setItem('cart-products', JSON.stringify(products))
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <View>
             <Text style={styles.title}>Proceso</Text>
 
-            <View style={ styles.stepsList }>
+            <View style={styles.stepsList}>
                 <View style={styles.step}>
                     <Text style={styles.stepTitle}>1. Selecciona tus fotos</Text>
                     <Text style={styles.stepDesc}>Selecciona 13 fotos para tu álbum</Text>
@@ -29,8 +51,7 @@ const ProductProcess = () => {
 
             <Button
                 title='Continuar'
-                onPress={() => { }}
-            />
+                onPress={onPress} />
         </View>
     )
 }
@@ -41,7 +62,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     stepsList: {
-        
+
     },
     step: {
         width: 185

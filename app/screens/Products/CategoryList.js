@@ -1,11 +1,20 @@
-import React, { useState, useEffect } from "react"
-import { View } from "react-native"
-import List from "./../../components/Product/List"
-import Fetch from "./../../utils/Fetch"
-import Loader from "./../../components/Loader"
-import { useNavigation } from "@react-navigation/native"
+import React, { useState, useEffect } from 'react'
+import { ImageBackground, StyleSheet, View } from 'react-native'
+import List from './../../components/Product/List'
+import Fetch from './../../utils/Fetch'
+import Loader from './../../components/Loader'
+import { useNavigation } from '@react-navigation/native'
 
-function CategoryList() {
+const styles = StyleSheet.create({
+    view: {
+        backgroundColor: '#ffffff'
+    },
+    image: {
+        resizeMode: 'contain'
+    }
+})
+
+const CategoryList = () => {
     const [categories, setCategories] = useState([])
     const [loading, setLoading] = useState(true)
     const navigation = useNavigation()
@@ -26,8 +35,15 @@ function CategoryList() {
     }
 
     return (
-        <View>
-            <List title="Productos" items={categories} onPress={onPress} />
+        <View
+            style={styles.view}>
+            <ImageBackground
+                source={require('./../../../assets/img/background-category.png')}
+                style={styles.image}>
+            <List
+                items={categories}
+                onPress={onPress} />
+            </ImageBackground>
         </View>
     )
 }

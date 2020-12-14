@@ -26,7 +26,7 @@ function CreateAccount() {
     return (
         <Text style={styles.textRegister}>
             ¿Aún no tienes una cuenta?{" "}
-            <Text 
+            <Text
                 style={styles.buttonRegister}
                 onPress={() => { navigation.navigate('register') }}>Registrate</Text>
         </Text>
