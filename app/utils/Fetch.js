@@ -1,3 +1,8 @@
+/**
+ * @author cesarmejia
+ * @class
+ * Reference: https://documenter.getpostman.com/view/5293044/TVYAgM2f#1e3f188a-b5f5-4bb7-8004-c89d0599389a
+ */
 class Fetch {
 
     /**
@@ -14,6 +19,12 @@ class Fetch {
             options['method'] = method
             options['headers'] = headers
             options['redirect'] = 'follow'
+
+            if (method === 'POST' || method === 'PUT') {
+                options['body'] = JSON.stringify(data)
+            }
+
+            console.log(options)
 
             fetch(url, options)
                 .then(res => res.json())

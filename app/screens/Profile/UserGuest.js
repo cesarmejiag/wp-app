@@ -3,7 +3,7 @@ import { StyleSheet, ScrollView, View, Text, Image } from 'react-native'
 import { Button } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 
-export default UserGuest = () => {
+export default function UserGuest() {
     const navigation = useNavigation();
 
     return (
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     },
     image: {
         height: 118,
-        marginBottom: 55,
+        marginBottom: 35,
         marginTop: 20,
         width: 210
     },
