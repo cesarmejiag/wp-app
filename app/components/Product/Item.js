@@ -1,36 +1,19 @@
 import React from 'react'
-import {
-    ImageBackground,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View
-} from 'react-native'
+import { ImageBackground, StyleSheet, Text } from 'react-native'
 
-export default function Item({ item, onPress }) {
+export default function Item({ item }) {
     const { name, main_photo_path } = item
-    const handlePress = () => { onPress(item) }
 
     return (
-        <View style={styles.container}>
-            <TouchableOpacity
-                onPress={handlePress}>
-                <ImageBackground
-                    style={styles.image}
-                    source={{ uri: main_photo_path }}>
-                    <Text style={styles.text}>{name}</Text>
-                </ImageBackground>
-            </TouchableOpacity>
-        </View>
+        <ImageBackground
+            style={styles.image}
+            source={{ uri: main_photo_path }}>
+            <Text style={styles.text}>{name}</Text>
+        </ImageBackground>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        marginBottom: 15,
-        marginTop: 15,
-        paddingHorizontal: 45
-    },
     text: {
         backgroundColor: "rgba(244, 215, 73, .66)",
         borderRadius: 10,

@@ -1,81 +1,63 @@
 import React from 'react'
-import {
-    ImageBackground,
-    StyleSheet,
-    ScrollView,
-    View,
-    Text
-} from 'react-native'
+import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { Button } from 'react-native-elements'
-import { useNavigation } from '@react-navigation/native'
+import Item from './../../components/Product/Item'
+import colors from './../../utils/colors'
 
-function ProductDetail({ route }) {
-    const { id, name, description, main_photo_path } = route.params.productData
-    const navigation = useNavigation()
+export default function ProductDetail({ navigation, route }) {
+    const item = route.params.item
+    const { id, description } = item
     const onPress = () => {
         navigation.navigate('product-process', { id })
     }
 
     return (
-        <ScrollView style={styles.view}>
+        <ScrollView>
             <ImageBackground
-                style={styles.image}
-                source={{
-                    uri: main_photo_path
-                }}>
-                <Text style={styles.name}>{name}</Text>
+                source={require('./../../../assets/img/background-category.png')}
+                style={styles.imageBackground}>
+                <View style={styles.container}>
+                    <View style={styles.itemContainer}>
+                        <Item item={item} />
+                    </View>
+                    <Text style={styles.title}>Caracteristicas</Text>
+                    <Text style={styles.description}>{description}</Text>
+                    <Button
+                        title="Activar"
+                        buttonStyle={{ backgroundColor: colors.ctaBgButton, borderRadius: 8, width: 170 }}
+                        titleStyle={{ color: colors.ctaColorButton, textTransform: 'uppercase' }}
+                        containerStyle={{ alignItems: 'center' }}
+                        onPress={onPress} />
+                </View>
             </ImageBackground>
-            <Text style={styles.title}>Caracteristicas</Text>
-            <Text style={styles.description}>{description}</Text>
-            <View>
-                <Button
-                    title="Crear"
-                    buttonStyle={styles.button}
-                    onPress={onPress} />
-            </View>
         </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
-    view: {
-        paddingHorizontal: 50
+    imageBackground: {
+        backgroundColor: '#fff',
+        minHeight: '100%',
+        resizeMode: 'contain'
     },
-    image: {
-        alignItems: "center",
-        borderColor: "#979797",
-        borderRadius: 13,
-        borderWidth: 1,
-        flex: 1,
-        height: 265,
-        justifyContent: "center",
-        marginBottom: 15,
-        marginTop: 40,
-        overflow: "hidden",
-        width: "100%"
+    container: {
+        marginHorizontal: 45,
+        marginVertical: 20
     },
-    name: {
-        color: "#ffffff",
-        fontSize: 19,
-        textAlign: "center",
-        textShadowColor: "rgba(0, 0, 0, 0.75)",
-        textShadowOffset: { width: -1, height: 1 },
-        textShadowRadius: 2,
-        textTransform: "uppercase"
+    itemContainer: {
+        marginVertical: 20
     },
     title: {
+        color: "#3A3A3A",
+        fontFamily: 'texgyreadventor-bold',
         fontSize: 19,
         textTransform: "uppercase"
     },
     description: {
+        color: "#3A3A3A",
+        fontFamily: 'AvenirLTStd-Book',
         fontSize: 15,
-        marginBottom: 20
-    },
-    button: {
-        backgroundColor: "#9B9B9B",
+        lineHeight: 20,
         marginBottom: 40
     }
 })
-
-export default ProductDetail
-
