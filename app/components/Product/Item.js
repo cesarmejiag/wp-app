@@ -14,19 +14,6 @@ export default function Item({ item }) {
 }
 
 const styles = StyleSheet.create({
-    text: {
-        backgroundColor: "rgba(244, 215, 73, .66)",
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: "#F4D749",
-        color: "#000",
-        fontFamily: 'Heavitas',
-        fontSize: 19,
-        paddingHorizontal: 15,
-        paddingVertical: 10,
-        textAlign: "center",
-        textTransform: "uppercase"
-    },
     image: {
         alignItems: "center",
         backgroundColor: "#fff",
@@ -46,5 +33,19 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.34,
         shadowRadius: 6.27,
         elevation: 10,
+    },
+    text: {
+        backgroundColor: "rgba(244, 215, 73, .66)",
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: "#F4D749",
+        color: "#000",
+        fontFamily: 'Heavitas',
+        fontSize: 19,
+        maxWidth: '90%',
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        textAlign: "center",
+        textTransform: "uppercase"
     }
 })

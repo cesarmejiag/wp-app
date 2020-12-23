@@ -7,15 +7,13 @@ import colors from './../../utils/colors'
 export default function ProductDetail({ navigation, route }) {
     const item = route.params.item
     const { id, description } = item
-    const onPress = () => {
-        navigation.navigate('product-process', { id })
-    }
+    const onPress = () => { navigation.navigate('product-process', { id }) }
 
     return (
-        <ScrollView>
-            <ImageBackground
-                source={require('./../../../assets/img/background-category.png')}
-                style={styles.imageBackground}>
+        <ImageBackground
+            source={require('./../../../assets/img/background-top-large.png')}
+            style={styles.imageBackground}>
+            <ScrollView>
                 <View style={styles.container}>
                     <View style={styles.itemContainer}>
                         <Item item={item} />
@@ -29,20 +27,20 @@ export default function ProductDetail({ navigation, route }) {
                         containerStyle={{ alignItems: 'center' }}
                         onPress={onPress} />
                 </View>
-            </ImageBackground>
-        </ScrollView>
+            </ScrollView>
+        </ImageBackground>
     )
 }
 
 const styles = StyleSheet.create({
     imageBackground: {
         backgroundColor: '#fff',
-        minHeight: '100%',
-        resizeMode: 'contain'
+        flex: 1,
+        resizeMode: 'cover',
     },
     container: {
-        marginHorizontal: 45,
-        marginVertical: 20
+        paddingBottom: 20,
+        paddingHorizontal: 45,
     },
     itemContainer: {
         marginVertical: 20

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { FlatList, ImageBackground, StyleSheet, View } from 'react-native'
+import { ImageBackground, StyleSheet, View, ScrollView } from 'react-native'
 import TouchableItem from './../../components/Product/TouchableItem'
 import Fetch from './../../utils/Fetch'
 import Loader from './../../components/Loader'
@@ -8,11 +8,6 @@ export default function List({ navigation, route, type, nextScreen }) {
     const [items, setItems] = useState([])
     const [loading, setLoading] = useState(true)
     const paramItem = route.params?.item;
-    const createTouchableItem = item => (
-        <View style={styles.itemContainer}>
-            <TouchableItem item={item} onPress={() => { navigation.navigate(nextScreen, { item }) }} />
-        </View>
-    )
 
     useEffect(() => {
         const endpoint = type === 'categories'
@@ -33,14 +28,20 @@ export default function List({ navigation, route, type, nextScreen }) {
 
     return (
         <ImageBackground
-            source={require('./../../../assets/img/background-category.png')}
+            source={require('./../../../assets/img/background-top-large.png')}
             style={styles.imageBackground}>
-            <View>
-                <FlatList
-                    renderItem={({ item }) => createTouchableItem(item)}
-                    keyExtractor={(item) => item.id}
-                    data={items} />
-            </View>
+            <ScrollView>
+                <View style={styles.container}>
+                    {items.map((item, id) => (
+                        <View style={styles.itemContainer}>
+                            <TouchableItem
+                                key={String(id)}
+                                item={item}
+                                onPress={() => { navigation.navigate(nextScreen, { item }) }} />
+                        </View>
+                    ))}
+                </View>
+            </ScrollView>
         </ImageBackground >
     )
 
@@ -49,11 +50,14 @@ export default function List({ navigation, route, type, nextScreen }) {
 const styles = StyleSheet.create({
     imageBackground: {
         backgroundColor: '#fff',
-        minHeight: '100%',
-        resizeMode: 'contain'
+        flex: 1,
+        resizeMode: 'cover'
+    },
+    container: {
+        paddingBottom: 20,
+        paddingHorizontal: 45,
     },
     itemContainer: {
-        marginHorizontal: 45,
         marginVertical: 20
     }
 })
