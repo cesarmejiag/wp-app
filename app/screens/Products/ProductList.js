@@ -26,11 +26,12 @@ const ProductList = ({ route }) => {
     }
 
     useEffect(() => {
-        Fetch.get(`https://floating-lake-44715.herokuapp.com/api/v1/products?page_size=15&page=1&category_id=${id}`)
-            .then(products => {
-                setProducts(products.data)
+        Fetch.get(`products?page_size=15&page=1&category_id=${id}`)
+            .then(response => {
+                setProducts(response.data)
                 setLoading(false)
             })
+            .catch(console.log)
     }, [])
 
     if (loading) {
@@ -43,9 +44,9 @@ const ProductList = ({ route }) => {
             <ImageBackground
                 source={require('./../../../assets/img/background-category.png')}
                 style={styles.image}>
-            <List 
-                items={products} 
-                onPress={onPress} />
+                <List
+                    items={products}
+                    onPress={onPress} />
             </ImageBackground>
         </View>
     )

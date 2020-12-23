@@ -7,20 +7,20 @@ import Fetch from './../../utils/Fetch'
 export default function RegisterPassword({ navigation, route }) {
     const { mail, name } = route.params
     const [pass, setPass] = useState('')
-    const createUser = () => {
-        Fetch.post('https://floating-lake-44715.herokuapp.com/api/v1/users', {
-            name: 'César Mejía',
-            email: 'cesarmejiaguzman@gmail.com',
-            password: 'p4ssw0rd123',
-            extras: {
-                first_name: "César",
-                last_name: "Mejía"
-            }
-        })
-        .then(res => {
-            console.log(res);
-        })
-        .catch(err => { console.log(err) });
+    const createUser = async () => {
+        try {
+            const response = await Fetch.post('users', {
+                name: 'César Mejía',
+                email: 'cesarmejiaguzman@gmail.com',
+                password: 'p4ssw0rd123',
+                extras: {
+                    first_name: "César",
+                    last_name: "Mejía"
+                }
+            })
+
+            console.log(response)
+        } catch (err) { console.log(err) }
     }
 
     return (

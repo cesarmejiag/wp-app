@@ -23,12 +23,13 @@ const CategoryList = () => {
     }
 
     useEffect(() => {
-        Fetch.get("https://floating-lake-44715.herokuapp.com/api/v1/categories")
-            .then(categories => {
-                setCategories(categories.data)
+        Fetch.get('categories')
+            .then(response => {
+                setCategories(response.data)
                 setLoading(false)
             })
-    }, [])
+            .catch(console.log)
+    }, []);
 
     if (loading) {
         return (<Loader isVisible={loading} text="Cargando..." />)
@@ -40,9 +41,9 @@ const CategoryList = () => {
             <ImageBackground
                 source={require('./../../../assets/img/background-category.png')}
                 style={styles.image}>
-            <List
-                items={categories}
-                onPress={onPress} />
+                <List
+                    items={categories}
+                    onPress={onPress} />
             </ImageBackground>
         </View>
     )

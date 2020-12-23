@@ -6,48 +6,68 @@
 class Fetch {
 
     /**
+     * @type {string}
+     */
+    static url = 'https://wiskipix.mx/api/v1'
+
+    /**
+     * Make a request.
+     * @param {string} endpoint
      * @param {string} method 
+     * @param {object} data
+     * @param {string} token
      * @returns {Promise}
      */
-    static send(method, url, data) {
-        return new Promise((res, rej) => {
-            const headers = new Headers()
-            const options = { }
+    static async send(endpoint, method, data, token) {
+        const init = {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            redirect: 'follow'
+        }
 
-            headers.append("Authorization", "Bearer 1|NvwPrPSHsY2GTnLKfBh5jh4w80AnY5OrHsT0U6tU")
+        if (token && typeof token === 'string') {
+            init['headers']['Authorization'] = `Bearer ${token}`
+        }
 
-            options['method'] = method
-            options['headers'] = headers
-            options['redirect'] = 'follow'
+        if ((method === 'POST' || method === 'PUT') && data instanceof Object) {
+            data['token_name'] = Date.now()
+            init['body'] = JSON.stringify(data)
+        }
 
-            if (method === 'POST' || method === 'PUT') {
-                options['body'] = JSON.stringify(data)
-            }
-
-            console.log(options)
-
-            fetch(url, options)
-                .then(res => res.json())
-                .then(json => { res(json) })
-                .catch(console.log)
-        })
+        const response = await fetch(`${Fetch.url}/${endpoint}`, init)
+        return response.json()
     }
 
     /**
-     * @param {string} url 
+     * Make a GET request.
+     * @param {string} endpoint 
+     * @param {string} token
      * @returns {Promise}
      */
-    static get(url) {
-        return Fetch.send('GET', url)
+    static get(endpoint, token) {
+        return Fetch.send(endpoint, 'GET', token)
     }
 
     /**
-     * @param {string} url 
+     * Make a POST request.
+     * @param {string} endpoint 
      * @param {object} data 
+     * @param {string} token
      * @returns {Promise}
      */
-    static post(url, data) {
-        return Fetch.send('POST', url, data)
+    static post(endpoint, data, token) {
+        return Fetch.send(endpoint, 'POST', data, token)
+    }
+
+    /**
+     * Make a PUT request.
+     * @param {string} endpoint 
+     * @param {object} data 
+     * @param {string} token 
+     * @returns {Promise}
+     */
+    static put(endpoint, data, token) {
+        return Fetch.send(endpoint, 'PUT', data, token)
     }
 
 }

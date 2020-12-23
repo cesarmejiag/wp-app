@@ -6,10 +6,6 @@ import ProductStack from './../navigations/ProductStack'
 import ProfileStack from './../navigations/ProfileStack'
 import CartStack from './../navigations/CartStack'
 
-// References:
-// Navigation - https://reactnavigation.org/
-// React Native Elements - https://reactnativeelements.com/
-
 const Tab = createBottomTabNavigator()
 
 /**
@@ -17,7 +13,7 @@ const Tab = createBottomTabNavigator()
  * @param {any} route 
  * @param {string} color 
  */
-const screenOptions = (route, color) => {
+const screenOptions = (route, color = '#3241F0') => {
     let iconName
 
     switch (route.name) {
@@ -35,7 +31,7 @@ const screenOptions = (route, color) => {
     }
 
     return (
-        <Icon type="material-community" name={iconName} size={25} color={"#3241F0"} />
+        <Icon type="material-community" name={iconName} size={25} color={color} />
     )
 }
 
@@ -54,7 +50,7 @@ const Navigation = () => (
                 inactiveBackgroundColor: "#ffffff",
             }}
             screenOptions={({ route }) => ({
-                tabBarIcon: ({ color }) => screenOptions(route, color)
+                tabBarIcon: ({ color }) => screenOptions(route)
             })}>
             <Tab.Screen
                 name="product-list"

@@ -61,7 +61,7 @@ function Cart() {
             .catch(error => console.log('error', error)); */
     
         // Get user
-        var myHeaders = new Headers();
+        /* var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         myHeaders.append("Authorization", "Bearer 5|IlT85M7KwdQBFwfZ0Tg01QiU9EsCOweB6tBLOwnd")
 
@@ -74,7 +74,7 @@ function Cart() {
         fetch("https://floating-lake-44715.herokuapp.com/api/v1/users/3", requestOptions)
             .then(response => response.json())
             .then(result => console.log(result))
-            .catch(error => console.log('error', error));
+            .catch(error => console.log('error', error)); */
     }
 
     return (

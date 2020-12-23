@@ -1,5 +1,6 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
+import Header from './../components/Header'
 import CategoryList from './../screens/Products/CategoryList'
 import ProductList from './../screens/Products/ProductList'
 import ProductDetail from './../screens/Products/ProductDetail'
@@ -15,7 +16,7 @@ const screenOptions = (route) => {
             shadowOpacity: 0
         },
         headerTintColor: '#FF0132',
-        headerTitleStyle: { }
+        headerTitleStyle: {}
     };
 
     switch (route.name) {
@@ -40,7 +41,26 @@ const screenOptions = (route) => {
 }
 
 const ProductStack = () => (
-    <Stack.Navigator>
+    <Stack.Navigator
+        screenOptions={{
+            header: ({ scene, previous, navigation }) => {
+                const { options } = scene.descriptor;
+                const title = 
+                    options.headerTitle !== undefined
+                        ? options.headerTitle
+                        : options.title !== undefined
+                            ? options.title
+                            : scene.route.name;
+
+                return (
+                    <Header 
+                        title={title}
+                        leftButton={previous}
+                        navigation={navigation}
+                        style={options.headerStyle}/>
+                )
+            }
+        }}>
         <Stack.Screen
             name="category-list"
             component={CategoryList}
