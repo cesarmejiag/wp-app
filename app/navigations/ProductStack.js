@@ -1,8 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import Header from './../components/Header'
-import CategoryList from './../screens/Products/CategoryList'
-import ProductList from './../screens/Products/ProductList'
+import List from './../screens/Products/List'
 import ProductDetail from './../screens/Products/ProductDetail'
 import ProductProcess from './../screens/Products/ProductProcess'
 
@@ -45,7 +44,7 @@ const ProductStack = () => (
         screenOptions={{
             header: ({ scene, previous, navigation }) => {
                 const { options } = scene.descriptor;
-                const title = 
+                const title =
                     options.headerTitle !== undefined
                         ? options.headerTitle
                         : options.title !== undefined
@@ -53,22 +52,20 @@ const ProductStack = () => (
                             : scene.route.name;
 
                 return (
-                    <Header 
+                    <Header
                         title={title}
                         leftButton={previous}
                         navigation={navigation}
-                        style={options.headerStyle}/>
+                        style={options.headerStyle} />
                 )
             }
         }}>
-        <Stack.Screen
-            name="category-list"
-            component={CategoryList}
-            options={({ route }) => screenOptions(route)} />
-        <Stack.Screen
-            name="product-list"
-            component={ProductList}
-            options={({ route }) => screenOptions(route)} />
+        <Stack.Screen name="category-list">
+            {props => <List {...props} type="categories" nextScreen="product-list" />}
+        </Stack.Screen>
+        <Stack.Screen name="product-list">
+            {props => <List {...props} type="products" nextScreen="product-detail" />}
+        </Stack.Screen>
         <Stack.Screen
             name="product-detail"
             component={ProductDetail}

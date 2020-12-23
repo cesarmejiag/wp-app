@@ -7,12 +7,9 @@ import {
     View
 } from 'react-native'
 
-export default function Item(props) {
-    const { data, onPress } = props
-    const { name, main_photo_path } = data
-    const handlePress = () => {
-        onPress(data)
-    }
+export default function Item({ item, onPress }) {
+    const { name, main_photo_path } = item
+    const handlePress = () => { onPress(item) }
 
     return (
         <View style={styles.container}>
@@ -55,6 +52,7 @@ const styles = StyleSheet.create({
         height: 265,
         justifyContent: "center",
         overflow: "hidden",
+        resizeMode: "cover",
         width: "100%",
 
         shadowColor: "#000",
