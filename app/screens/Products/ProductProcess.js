@@ -1,30 +1,25 @@
 import React from 'react'
-import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, Image, ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { Button } from 'react-native-elements'
+import Cart from './../../utils/Cart'
 import colors from './../../utils/colors'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function ProductProcess({ route }) {
+    const item = route.params.item;
     const onPress = async () => {
+        let alertText;
+
         try {
-            const { id } = route.params.id
+            await Cart.add(item);
+            alertText = `${item.name} ha sido agregado.`;
+        } catch (err) { alertText = `No se pudo agregar ${item.name} por favor inténtalo más tarde`; }
 
-            // Retrieve cart products.
-            let productsStr = await AsyncStorage.getItem('cart-products')
-            let products
-
-            if (!productsStr) {
-                products = []
-            } else {
-                products = JSON.parse(productsStr)
-            }
-
-            products.push(id)
-            AsyncStorage.setItem('cart-products', JSON.stringify(products))
-
-        } catch (error) {
-            console.log(error)
-        }
+        Alert.alert(
+            "Carrito de Compras",
+            alertText,
+            [{ text: "Cerrar" }],
+            { cancelable: false }
+        );
     }
 
     return (
@@ -36,14 +31,23 @@ export default function ProductProcess({ route }) {
                     <Text style={styles.title}>Proceso</Text>
                     <View style={styles.stepsList}>
                         <View style={styles.step}>
+                            <Image
+                                style={styles.stepIcon}
+                                source={require('./../../../assets/img/icon-step-1.png')} />
                             <Text style={styles.stepTitle}>1. Selecciona tus fotos</Text>
                             <Text style={styles.stepDesc}>Selecciona 13 fotos para tu álbum</Text>
                         </View>
                         <View style={styles.step}>
+                            <Image
+                                style={styles.stepIcon}
+                                source={require('./../../../assets/img/icon-step-2.png')} />
                             <Text style={styles.stepTitle}>2. Auto relleno</Text>
                             <Text style={styles.stepDesc}>Nuestra App acomoda tus fotos de la mejor manera</Text>
                         </View>
                         <View style={styles.step}>
+                            <Image
+                                style={styles.stepIcon}
+                                source={require('./../../../assets/img/icon-step-3.png')} />
                             <Text style={styles.stepTitle}>3. Personaliza</Text>
                             <Text style={styles.stepDesc}>Puedes recortar y acomodar tus fotos para que luzcan mejor</Text>
                         </View>
@@ -76,14 +80,21 @@ const styles = StyleSheet.create({
         fontFamily: 'texgyreadventor-bold',
         fontSize: 19,
         marginBottom: 30,
+        marginTop: 20,
         textAlign: "center"
     },
     stepsList: {
         alignItems: "center"
     },
     step: {
+        alignItems: "center",
         marginBottom: 30,
         width: 220
+    },
+    stepIcon: {
+        height: 40,
+        marginBottom: 10,
+        width: 40
     },
     stepTitle: {
         color: "#000",

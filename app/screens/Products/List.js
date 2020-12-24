@@ -35,7 +35,7 @@ export default function List({ navigation, route, type, nextScreen }) {
                     {items.map((item, id) => (
                         <View style={styles.itemContainer}>
                             <TouchableItem
-                                key={String(id)}
+                                key={id}
                                 item={item}
                                 onPress={() => { navigation.navigate(nextScreen, { item }) }} />
                         </View>

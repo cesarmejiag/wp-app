@@ -6,8 +6,8 @@ import colors from './../../utils/colors'
 
 export default function ProductDetail({ navigation, route }) {
     const item = route.params.item
-    const { id, description } = item
-    const onPress = () => { navigation.navigate('product-process', { id }) }
+    const { description } = item
+    const onPress = () => { navigation.navigate('product-process', { item }) }
 
     return (
         <ImageBackground
