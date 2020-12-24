@@ -1,15 +1,21 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import Cart from './../screens/Cart'
+import CartScreen from './../screens/Cart/CartScreen'
 
 const Stack = createStackNavigator();
 
 function CartStack() {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator
+            screenOptions={{
+                headerTitleStyle: {
+                    fontFamily: 'Heavitas',
+                    textTransform: 'uppercase'
+                }
+            }}>
             <Stack.Screen
                 name="cart"
-                component={Cart}
+                component={CartScreen}
                 options={{ title: 'Carrito' }} />
         </Stack.Navigator>
     );
