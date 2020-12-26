@@ -33,9 +33,8 @@ export default function List({ navigation, route, type, nextScreen }) {
             <ScrollView>
                 <View style={styles.container}>
                     {items.map((item, id) => (
-                        <View style={styles.itemContainer}>
+                        <View key={id} style={styles.itemContainer}>
                             <TouchableItem
-                                key={id}
                                 item={item}
                                 onPress={() => { navigation.navigate(nextScreen, { item }) }} />
                         </View>

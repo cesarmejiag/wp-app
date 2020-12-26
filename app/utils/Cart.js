@@ -21,6 +21,8 @@ export default class Cart {
                 } else {
                     items.push({
                         id: item.id,
+                        item: item,
+                        isGift: false,
                         quantity: quantity
                     });
                 }

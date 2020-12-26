@@ -5,6 +5,7 @@ import CartScreen from './../screens/Cart/CartScreen'
 const Stack = createStackNavigator();
 
 function CartStack() {
+
     return (
         <Stack.Navigator
             screenOptions={{
