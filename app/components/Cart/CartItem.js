@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     product: {
         alignItems: 'center',
         flexDirection: 'row',
+        fontSize: 13,
         paddingHorizontal: 5,
         paddingVertical: 20
     },
