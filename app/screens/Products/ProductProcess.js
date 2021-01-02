@@ -2,7 +2,7 @@ import React from 'react'
 import { Alert, Image, ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { Button } from 'react-native-elements'
 import Cart from './../../utils/Cart'
-import colors from './../../utils/colors'
+import globalStyles from './../../utils/styles'
 
 export default function ProductProcess({ route }) {
     const item = route.params.item;
@@ -55,9 +55,9 @@ export default function ProductProcess({ route }) {
 
                     <Button
                         title='Continuar'
-                        buttonStyle={{ backgroundColor: colors.ctaBgButton, borderRadius: 8, width: 170 }}
-                        titleStyle={{ color: colors.ctaColorButton, textTransform: 'uppercase' }}
-                        containerStyle={{ alignItems: 'center' }}
+                        buttonStyle={globalStyles.btn}
+                        containerStyle={globalStyles.btnContainer}
+                        titleStyle={globalStyles.btnTitle}
                         onPress={onPress} />
                 </View>
             </ScrollView>

@@ -3,7 +3,7 @@ import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-nativ
 import { Button, Divider } from 'react-native-elements'
 import Cart from './../../utils/Cart'
 import CartItem from './../../components/Cart/CartItem'
-import colors from './../../utils/colors'
+import globalStyles from './../../utils/styles'
 
 export default function CartScreen({ navigation }) {
     const [cartItems, setCartItems] = useState([]);
@@ -50,9 +50,9 @@ export default function CartScreen({ navigation }) {
             </ImageBackground>
             <Button
                 title="Pagar"
-                buttonStyle={{ backgroundColor: colors.ctaBgButton, borderRadius: 8, width: 170 }}
-                titleStyle={{ color: colors.ctaColorButton, textTransform: 'uppercase' }}
-                containerStyle={{ alignItems: 'center' }}
+                buttonStyle={globalStyles.btn}
+                containerStyle={globalStyles.btnContainer}
+                titleStyle={globalStyles.btnTitle}
                 onPress={showItems} />
         </View>
     );

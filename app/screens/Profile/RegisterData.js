@@ -1,10 +1,13 @@
-import React from 'react'
-import { ImageBackground, StyleSheet, View, Image } from 'react-native'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import React, { useState } from 'react'
+import { Image, ImageBackground, StyleSheet, View } from 'react-native'
 import { Button } from 'react-native-elements'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import FormInput from './../../components/Profile/FormInput'
 import globalStyles from './../../utils/styles'
 
-export default function UserGuest({ navigation }) {
+export default function RegisterData({ navigation }) {
+    const [data, setData] = useState('');
+
     return (
         <ImageBackground
             source={require('./../../../assets/img/background-bottom-large.png')}
@@ -16,18 +19,16 @@ export default function UserGuest({ navigation }) {
                         resizeMode="contain"
                         style={styles.image} />
 
+                    <FormInput 
+                        label="¿Cuál es tu mail?" 
+                        onChangeText={setData} />
+
                     <Button
-                        title="Crear Cuenta"
+                        title="Continuar"
                         buttonStyle={globalStyles.btn}
                         containerStyle={globalStyles.btnContainer}
                         titleStyle={globalStyles.btnTitle}
-                        onPress={() => { navigation.navigate('register-mail') }} />
-                    <Button
-                        title="Conectarse"
-                        buttonStyle={globalStyles.btn}
-                        containerStyle={globalStyles.btnContainer}
-                        titleStyle={globalStyles.btnTitle}
-                        onPress={() => { navigation.navigate('login') }} />
+                        onPress={() => console.log('change view')} />
                 </View>
             </KeyboardAwareScrollView>
         </ImageBackground>
@@ -51,4 +52,4 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
         width: 130
     }
-});
+})

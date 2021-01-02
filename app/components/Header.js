@@ -3,11 +3,23 @@ import { Image, StyleSheet, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Icon } from 'react-native-elements'
 
-export default function Header({ title, leftButton, navigation, style }) {
-    const insets = useSafeAreaInsets();
+export default function Header({ title, leftButton, navigation, style, profileScreen }) {
+    const insets = useSafeAreaInsets()
+    let headerStyle = { ...styles.header }
+    let logo = (
+        <Image
+            style={styles.logo}
+            source={require('./../../assets/img/logo.png')} />
+    )
+
+    if (profileScreen) {
+        logo = undefined
+        headerStyle['backgroundColor'] = '#ffffff'
+    }
+
 
     return (
-        <View style={[styles.header, { paddingTop: insets.top }]}>
+        <View style={[headerStyle, { paddingTop: insets.top }]}>
             <View style={[styles.side, styles.alignLeft, { paddingLeft: 30 }]}>
                 {leftButton && <Icon
                     type="material-community"
@@ -17,9 +29,7 @@ export default function Header({ title, leftButton, navigation, style }) {
                     onPress={navigation.goBack} />}
             </View>
             <View style={styles.logoWrapper}>
-                <Image
-                    style={styles.logo}
-                    source={require('./../../assets/img/logo.png')} />
+                {logo}
             </View>
             <View style={styles.side}></View>
         </View>
@@ -29,7 +39,7 @@ export default function Header({ title, leftButton, navigation, style }) {
 const styles = StyleSheet.create({
     header: {
         alignItems: "center",
-        backgroundColor: "#B9F7FA",
+        backgroundColor: "#BCFCFF",
         flexDirection: "row",
         height: 90,
     },
@@ -48,4 +58,4 @@ const styles = StyleSheet.create({
         resizeMode: "contain",
         width: 138
     }
-});
+})

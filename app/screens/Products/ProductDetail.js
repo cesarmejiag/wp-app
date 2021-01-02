@@ -2,7 +2,7 @@ import React from 'react'
 import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { Button } from 'react-native-elements'
 import Item from './../../components/Product/Item'
-import colors from './../../utils/colors'
+import globalStyles from './../../utils/styles'
 
 export default function ProductDetail({ navigation, route }) {
     const item = route.params.item
@@ -22,9 +22,9 @@ export default function ProductDetail({ navigation, route }) {
                     <Text style={styles.description}>{description}</Text>
                     <Button
                         title="Activar"
-                        buttonStyle={{ backgroundColor: colors.ctaBgButton, borderRadius: 8, width: 170 }}
-                        titleStyle={{ color: colors.ctaColorButton, textTransform: 'uppercase' }}
-                        containerStyle={{ alignItems: 'center' }}
+                        buttonStyle={globalStyles.btn}
+                        containerStyle={globalStyles.btnContainer}
+                        titleStyle={globalStyles.btnTitle}
                         onPress={onPress} />
                 </View>
             </ScrollView>

@@ -4,7 +4,7 @@ import Loader from './../../components/Loader'
 import UserGuest from './UserGuest'
 import UserLogged from './UserLogged'
 
-export default Profile = () => {
+export default Profile = ({ navigation }) => {
     const [logged, setLogged] = useState(false)
     const [loading, setLoading] = useState(true)
 
@@ -19,5 +19,5 @@ export default Profile = () => {
         return <Loader isVisible={loading} text="Cargando..." />
     }
 
-    return logged ? <UserLogged /> : <UserGuest />
+    return logged ? <UserLogged /> : <UserGuest navigation={navigation} />
 }

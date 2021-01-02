@@ -4,33 +4,38 @@ import { Input } from 'react-native-elements'
 
 export default function FormInput({ label, onChangeText }) {
     return (
-        <View
-            style={styles.formInput}>
-            <Text style={styles.label}>{label}</Text>
+        <View style={styles.container}>
+            <Text style={styles.text}>{label}</Text>
             <Input
-                style={styles.input}
-                inputStyle={styles.inputText}
+                containerStyle={styles.inputContainer}
+                inputContainerStyle={styles.inputContainerStyle}
+                inputStyle={styles.input}
                 onChangeText={onChangeText} />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    formInput: {
-        marginBottom: 10
+    container: {
+        marginBottom: 60
     },
-    label: {
-        color: "#494949",
+    text: {
+        color: '#494949',
+        fontFamily: 'texgyreadventor-bold',
         fontSize: 14,
+        letterSpacing: 1.4,
         marginBottom: 10,
-        textAlign: "center"
+        textAlign: 'center'
+    },
+    inputContainer: {
+        alignItems: 'baseline'
+    },
+    inputContainerStyle: {
+
     },
     input: {
         borderBottomWidth: 1,
         borderBottomColor: "#404040",
         textAlign: "center"
     },
-    inputText: {
-        textAlign: "center"
-    }
-});
+})
