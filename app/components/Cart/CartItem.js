@@ -1,33 +1,46 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
-import { Divider } from 'react-native-elements'
+import { Divider, Icon } from 'react-native-elements'
 import Formatter from './../../utils/Formatter'
 
 export default function CartItem({ cartItem }) {
     const { item, quantity } = cartItem
     const { name, sale_price, main_photo_path } = item
 
+    const add = () => {
+        console.log('add');
+    }
+
+    const subtract = () => {
+        console.log('subtract');
+    }
+
     return (
         <View>
             <View style={styles.product}>
                 <View style={styles.imageWrapper}>
                     <Image
-                        style={styles.image}
+                        style={{ height: 90, resizeMode: 'cover', width: 90 }}
                         source={{ uri: main_photo_path }} />
                 </View>
-                <View style={styles.desc}>
+                <View style={{ paddingLeft: 10, width: '45%' }}>
                     <Text>{name}</Text>
                 </View>
-                <View style={styles.price}>
-                    <Text>{Formatter.currency(sale_price)}</Text>
+                <View style={{ width: '25%' }}>
+                    <Text style={{ textAlign: 'right' }}>{Formatter.currency(sale_price)}</Text>
                 </View>
             </View>
             <Divider style={styles.divider} />
 
             <View style={[styles.row, styles.edit]}>
-                <Text>Editar</Text>
-                <View>
-                    <Text>{quantity}</Text>
+                <View style={{ flexDirection: 'row' }}>
+                    <Icon type="material-community" name="pencil" size={20} color="#3241F0" />
+                    <Text style={{ paddingLeft: 5 }}>Editar</Text>
+                </View>
+                <View style={{ flexDirection: 'row' }}>
+                    <Icon type="material-community" name="plus" size={20} onPress={add} color="#fff" containerStyle={{ backgroundColor: '#3241F0', borderRadius: 50, }} />
+                    <Text style={{ marginHorizontal: 10 }}>{quantity}</Text>
+                    <Icon type="material-community" name="minus" size={20} onPress={subtract} color="#fff" containerStyle={{ backgroundColor: '#3241F0', borderRadius: 50, }} />
                 </View>
             </View>
             <Divider style={styles.divider} />
@@ -44,10 +57,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         fontSize: 13,
+        justifyContent: 'space-between',
         paddingHorizontal: 5,
         paddingVertical: 20
     },
     imageWrapper: {
+        backgroundColor: '#fff',
         borderRadius: 13,
         height: 90,
         width: 90,
@@ -59,23 +74,21 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.34,
         shadowRadius: 3,
-        elevation: 2,
+        elevation: 3,
     },
-    image: {
-        height: 90,
-        width: 90
-    },
+
     row: {
+        alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingHorizontal: 5,
-        paddingVertical: 5
+        paddingVertical: 8
     },
     edit: {
 
     },
     gift: {
-
+        marginTop: 5
     },
     divider: {
         backgroundColor: '#494949'

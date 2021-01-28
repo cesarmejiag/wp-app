@@ -4,8 +4,7 @@ import CartScreen from './../screens/Cart/CartScreen'
 
 const Stack = createStackNavigator();
 
-function CartStack() {
-
+export default function CartStack() {
     return (
         <Stack.Navigator
             screenOptions={{
@@ -21,5 +20,3 @@ function CartStack() {
         </Stack.Navigator>
     );
 }
-
-export default CartStack

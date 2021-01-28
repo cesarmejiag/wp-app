@@ -39,33 +39,33 @@ const screenOptions = (route, color = '#3241F0') => {
  * Create Navigation component.
  * @returns {JSX}
  */
-const Navigation = () => (
-    <NavigationContainer>
-        <Tab.Navigator
-            initialRouteName="product-list"
-            tabBarOptions={{
-                activeTintColor: "#717171",
-                activeBackgroundColor: "#ffffff",
-                inactiveTintColor: "#717171",
-                inactiveBackgroundColor: "#ffffff",
-            }}
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ color }) => screenOptions(route)
-            })}>
-            <Tab.Screen
-                name="product-list"
-                component={ProductStack}
-                options={{ title: 'Inicio' }} />
-            <Tab.Screen
-                name="profile"
-                component={ProfileStack}
-                options={{ title: 'Mi Perfil' }} />
-            <Tab.Screen
-                name="cart"
-                component={CartStack}
-                options={{ title: 'Carrito' }} />
-        </Tab.Navigator>
-    </NavigationContainer>
-)
-
-export default Navigation
+export default function Navigation() {
+    return (
+        <NavigationContainer>
+            <Tab.Navigator
+                initialRouteName="product-list"
+                tabBarOptions={{
+                    activeTintColor: "#717171",
+                    activeBackgroundColor: "#ffffff",
+                    inactiveTintColor: "#717171",
+                    inactiveBackgroundColor: "#ffffff",
+                }}
+                screenOptions={({ route }) => ({
+                    tabBarIcon: ({ color }) => screenOptions(route)
+                })}>
+                <Tab.Screen
+                    name="product-list"
+                    component={ProductStack}
+                    options={{ title: 'Inicio' }} />
+                <Tab.Screen
+                    name="profile"
+                    component={ProfileStack}
+                    options={{ title: 'Mi Perfil' }} />
+                <Tab.Screen
+                    name="cart"
+                    component={CartStack}
+                    options={{ title: 'Carrito' }} />
+            </Tab.Navigator>
+        </NavigationContainer>
+    )
+}
