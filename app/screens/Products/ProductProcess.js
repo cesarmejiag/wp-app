@@ -4,7 +4,7 @@ import { Button } from 'react-native-elements'
 import Cart from './../../utils/Cart'
 import globalStyles from './../../utils/styles'
 
-export default function ProductProcess({ route }) {
+export default function ProductProcess({ navigation, route }) {
     const item = route.params.item;
     const onPress = async () => {
         let alertText;
@@ -58,7 +58,7 @@ export default function ProductProcess({ route }) {
                         buttonStyle={globalStyles.btn}
                         containerStyle={globalStyles.btnContainer}
                         titleStyle={globalStyles.btnTitle}
-                        onPress={onPress} />
+                        onPress={() => navigation.navigate('image-browser')} />
                 </View>
             </ScrollView>
         </ImageBackground>

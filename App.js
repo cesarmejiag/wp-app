@@ -3,8 +3,6 @@ import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
 
 import Navigation from './app/navigations/Navigation'
-import { firebaseApp } from './app/utils/firebase'
-
 
 /**
  * Load fonts
