@@ -1,35 +1,68 @@
 import React from 'react'
-import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native'
+import {
+    ImageBackground,
+    ScrollView,
+    StyleSheet,
+    Text,
+    useWindowDimensions,
+    View,
+} from 'react-native'
 import { Button } from 'react-native-elements'
 import Item from './../../components/Product/Item'
 import globalStyles from './../../utils/styles'
+import HTML from 'react-native-render-html'
 
 export default function ProductDetail({ navigation, route }) {
+    const contentWidth = useWindowDimensions().width
+
     const item = route.params.item
     const { description } = item
-    const onPress = () => { navigation.navigate('product-process', { item }) }
+
+    const onPress = () => {
+        navigation.navigate('product-process', { item })
+    }
 
     return (
         <ImageBackground
             source={require('./../../../assets/img/background-top-large.png')}
-            style={styles.imageBackground}>
+            style={styles.imageBackground}
+        >
             <ScrollView>
                 <View style={styles.container}>
                     <View style={styles.itemContainer}>
                         <Item item={item} />
                     </View>
-                    <Text style={styles.title}>Caracteristicas</Text>
-                    <Text style={styles.description}>{description}</Text>
+                    <Text style={styles.title}>Características</Text>
+                    <View style={styles.descriptionWrapper}>
+                        <HTML
+                            tagsStyles={HTMLStyles}
+                            classesStyles={HTMLStyles}
+                            source={{
+                                html: `<div class="description">${description}</div>`,
+                            }}
+                            contentWidth={contentWidth}
+                        />
+                    </View>
                     <Button
                         title="Activar"
                         buttonStyle={globalStyles.btn}
                         containerStyle={globalStyles.btnContainer}
                         titleStyle={globalStyles.btnTitle}
-                        onPress={onPress} />
+                        onPress={onPress}
+                    />
                 </View>
             </ScrollView>
         </ImageBackground>
     )
+}
+
+const HTMLStyles = {
+    description: {
+        color: '#3A3A3A',
+        fontFamily: 'AvenirLTStd-Book',
+        fontSize: 15,
+        lineHeight: 20,
+    },
 }
 
 const styles = StyleSheet.create({
@@ -43,19 +76,16 @@ const styles = StyleSheet.create({
         paddingHorizontal: 45,
     },
     itemContainer: {
-        marginVertical: 20
+        marginVertical: 20,
     },
     title: {
-        color: "#3A3A3A",
+        color: '#3A3A3A',
         fontFamily: 'texgyreadventor-bold',
         fontSize: 19,
-        textTransform: "uppercase"
+        textTransform: 'uppercase',
     },
-    description: {
-        color: "#3A3A3A",
-        fontFamily: 'AvenirLTStd-Book',
-        fontSize: 15,
-        lineHeight: 20,
-        marginBottom: 40
-    }
+    descriptionWrapper: {
+        marginTop: 10,
+        marginBottom: 40,
+    },
 })
