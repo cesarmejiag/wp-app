@@ -4,7 +4,7 @@ import Header from './../components/Header'
 import List from './../screens/Products/List'
 import ProductDetail from './../screens/Products/ProductDetail'
 import ProductProcess from './../screens/Products/ProductProcess'
-import ImageBrowser from './../screens/Products/ImageBrowserScreen'
+import ImageBrowser from './../screens/Browser/BrowserScreen'
 
 const Stack = createStackNavigator()
 
@@ -42,9 +42,9 @@ export default function ProductStack() {
             <Stack.Screen
                 name="product-process"
                 component={ProductProcess} />
-            <Stack.Screen 
+            <Stack.Screen
                 name="image-browser"
                 component={ImageBrowser} />
         </Stack.Navigator>
     )
-} 
+}
