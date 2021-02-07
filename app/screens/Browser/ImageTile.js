@@ -7,7 +7,7 @@ import {
     View,
     Image,
 } from 'react-native'
-import { PADDING_WRAP_SIZE } from '../../constants/config'
+import { PADDING_WRAP_SIZE } from '@app/constants/config'
 
 const { width: screenWidth } = Dimensions.get('window')
 
@@ -16,7 +16,7 @@ const getTileSize = columns => {
 }
 
 const getImageIcon = () => {
-    return require('../../../assets/checked.png')
+    return require('@assets/checked.png')
 }
 
 const getSelectedIcon = number => {
