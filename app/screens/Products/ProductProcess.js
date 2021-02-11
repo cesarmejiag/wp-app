@@ -1,26 +1,10 @@
 import React from 'react'
-import { Alert, Image, ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Image, ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { Button } from 'react-native-elements'
-import Cart from './../../utils/Cart'
 import globalStyles from './../../utils/styles'
 
 export default function ProductProcess({ navigation, route }) {
     const item = route.params.item;
-    const onPress = async () => {
-        let alertText;
-
-        try {
-            await Cart.add(item);
-            alertText = `${item.name} ha sido agregado.`;
-        } catch (err) { alertText = `No se pudo agregar ${item.name} por favor inténtalo más tarde`; }
-
-        Alert.alert(
-            "Carrito de Compras",
-            alertText,
-            [{ text: "Cerrar" }],
-            { cancelable: false }
-        );
-    }
 
     return (
         <ImageBackground

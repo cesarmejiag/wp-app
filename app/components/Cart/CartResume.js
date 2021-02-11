@@ -1,25 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Divider } from 'react-native-elements'
 import Formatter from './../../utils/Formatter'
 
-export default function CartResume({ items }) {
-    const [total, setTotal] = useState(0)
-
-    useEffect(() => {
-        let tempTotal = 0
-        items.forEach(item => {
-            tempTotal += item.quantity * item.item['unit_price'];
-        })
-
-        setTotal(tempTotal);
-    }, [items])
-
+export default function CartResume({ subTotal }) {
     return (
         <View style={styles.resume}>
             <View style={styles.concept}>
                 <Text>Sub-total</Text>
-                <Text>{Formatter.currency(total)}</Text>
+                <Text>{Formatter.currency(subTotal)}</Text>
             </View>
             <Divider style={styles.divider} />
             <View style={styles.concept}>

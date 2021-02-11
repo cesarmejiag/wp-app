@@ -2,12 +2,16 @@ import React from 'react'
 import { Image, StyleSheet, Text, ScrollView, View } from 'react-native'
 import CartItem from './CartItem'
 
-export default function CartList({ items }) {
+export default function CartList({ items, onAddToCart, onRemoveFromCart }) {
     if (items.length > 0) {
         return (
             <ScrollView style={styles.scrollView}>
                 { items.map((item, index) => (
-                    <CartItem key={index} cartItem={item} />
+                    <CartItem
+                        key={index}
+                        item={item}
+                        onAddToCart={onAddToCart}
+                        onRemoveFromCart={onRemoveFromCart} />
                 ))}
             </ScrollView>
         )

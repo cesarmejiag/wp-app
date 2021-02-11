@@ -3,17 +3,11 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import { Divider, Icon } from 'react-native-elements'
 import Formatter from './../../utils/Formatter'
 
-export default function CartItem({ cartItem }) {
-    const { item, quantity } = cartItem
-    const { name, sale_price, main_photo_path } = item
+export default function CartItem({ item, onAddToCart, onRemoveFromCart }) {
+    const { product_image, product_name, price, quantity } = item;
 
-    const add = () => {
-        console.log('add');
-    }
-
-    const subtract = () => {
-        console.log('subtract');
-    }
+    const add = () => onAddToCart(item)
+    const subtract = () => onRemoveFromCart(item)
 
     return (
         <View>
@@ -21,13 +15,13 @@ export default function CartItem({ cartItem }) {
                 <View style={styles.imageWrapper}>
                     <Image
                         style={{ height: 90, resizeMode: 'cover', width: 90 }}
-                        source={{ uri: main_photo_path }} />
+                        source={{ uri: product_image }} />
                 </View>
                 <View style={{ paddingLeft: 10, width: '45%' }}>
-                    <Text>{name}</Text>
+                    <Text>{product_name}</Text>
                 </View>
                 <View style={{ width: '25%' }}>
-                    <Text style={{ textAlign: 'right' }}>{Formatter.currency(sale_price)}</Text>
+                    <Text style={{ textAlign: 'right' }}>{Formatter.currency(price)}</Text>
                 </View>
             </View>
             <Divider style={styles.divider} />
