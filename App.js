@@ -1,41 +1,37 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as Font from 'expo-font'
+import { Platform, Text } from 'react-native'
 import { AppLoading } from 'expo'
-
 import Navigation from './app/navigations/Navigation'
 
-/**
- * Load fonts
- * @returns {Promise}
- */
-const fetchFonts = () => {
-  return Font.loadAsync({
-    'Heavitas': require('./assets/fonts/Heavitas.ttf'),
-    'AvenirLTStd-Book': require('./assets/fonts/AvenirLTStd-Book.otf'),
-    'texgyreadventor-regular': require('./assets/fonts/texgyreadventor-regular.otf'),
-    'texgyreadventor-bold': require('./assets/fonts/texgyreadventor-bold.otf')
-  })
-}
-
-/**
- * Initialize Wiskipix App.
- * @returns {JSX}
- */
 const App = () => {
   const [loadedData, setLoadedData] = useState(false)
 
+  useEffect(() => {
+    const fetchFonts = async () => {
+      await Font.loadAsync({
+        Heavitas: require('./assets/fonts/Heavitas.ttf'),
+        'AvenirLTStd-Book': require('./assets/fonts/AvenirLTStd-Book.otf'),
+        'texgyreadventor-regular': require('./assets/fonts/texgyreadventor-regular.otf'),
+        'texgyreadventor-bold': require('./assets/fonts/texgyreadventor-bold.otf'),
+      })
+
+      setLoadedData(true)
+    }
+
+    fetchFonts()
+    return () => {}
+  }, [])
+
   if (!loadedData) {
-    return (
-      <AppLoading
-        startAsync={fetchFonts}
-        onFinish={() => setLoadedData(true)}
-      />
-    )
+    if (Platform.OS === 'ios') {
+      return <Text>Cargando...</Text>
+    } else {
+      return <AppLoading />
+    }
   }
 
-  return (
-    <Navigation />
-  )
+  return <Navigation />
 }
 
 export default App
