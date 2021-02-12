@@ -8,10 +8,10 @@ import {
     View,
 } from 'react-native'
 import { Button } from 'react-native-elements'
-import Item from './../../components/Product/Item'
-import globalStyles from './../../utils/styles'
 import HTML from 'react-native-render-html'
+import globalStyles from './../../utils/styles'
 import useCart from './../../hooks/useCart';
+import TouchableItem from "../../components/Product/TouchableItem";
 
 export default function ProductDetail({ navigation, route }) {
     const { addToCart } = useCart();
@@ -33,7 +33,7 @@ export default function ProductDetail({ navigation, route }) {
             <ScrollView>
                 <View style={styles.container}>
                     <View style={styles.itemContainer}>
-                        <Item item={item} />
+                        <TouchableItem item={item} onPress={onPress} />
                     </View>
                     <Text style={styles.title}>Características</Text>
                     <View style={styles.descriptionWrapper}>
