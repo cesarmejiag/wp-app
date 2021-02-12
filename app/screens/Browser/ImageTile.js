@@ -7,7 +7,7 @@ import {
     View,
     Image,
 } from 'react-native'
-import { PADDING_WRAP_SIZE } from '@app/constants/config'
+import { PADDING_WRAP_SIZE } from 'constants/config'
 
 const { width: screenWidth } = Dimensions.get('window')
 

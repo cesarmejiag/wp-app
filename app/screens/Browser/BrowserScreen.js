@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import ImageBrowser from './ImageBrowser'
 import { Button } from 'react-native-elements'
-import globalStyles from '@app/utils/styles'
-import { PADDING_WRAP_SIZE } from '@app/constants/config'
+import globalStyles from 'utils/styles'
+import { PADDING_WRAP_SIZE } from 'constants/config'
 
 const BrowserScreen = ({ navigation }) => {
     const emptyStayComponent = <Text>Empty</Text>

@@ -34,7 +34,8 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0"
+    "@babel/core": "~7.9.0",
+    "babel-plugin-module-resolver": "^4.0.0"
   },
   "private": true
 }

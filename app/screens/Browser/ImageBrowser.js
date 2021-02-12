@@ -10,9 +10,9 @@ import {
 import * as ScreenOrientation from 'expo-screen-orientation'
 import * as MediaLibrary from 'expo-media-library'
 import * as Permissions from 'expo-permissions'
-import { LANDSCAPE_SISE, PORTRAIT_SIZE } from '@app/constants/config'
+import { LANDSCAPE_SISE, PORTRAIT_SIZE } from 'constants/config'
 import ImageTile from './ImageTile'
-import Loader from '@app/components/Loader'
+import Loader from 'components/Loader'
 
 const { width } = Dimensions.get('window')
 

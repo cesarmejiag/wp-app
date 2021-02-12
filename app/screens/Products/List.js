@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { ImageBackground, StyleSheet, View, ScrollView } from 'react-native'
-import TouchableItem from '@app/components/Product/TouchableItem'
-import Fetch from '@app/utils/Fetch'
-import Loader from '@app/components/Loader'
-import FloatImage from '@app/components/FloatImage'
+import TouchableItem from 'components/Product/TouchableItem'
+import Fetch from 'utils/Fetch'
+import Loader from 'components/Loader'
+import FloatImage from 'components/FloatImage'
 
 export default function List({ navigation, route, type, nextScreen }) {
     const [items, setItems] = useState([])
