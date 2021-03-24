@@ -1,16 +1,17 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { Input } from 'react-native-elements'
+import {StyleSheet, Text, View} from 'react-native'
+import {Input} from 'react-native-elements'
 
-export default function FormInput({ label, onChangeText }) {
+export default function FormInput({label, onChangeText, secureTextEntry}) {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>{label}</Text>
             <Input
+                secureTextEntry={secureTextEntry}
                 containerStyle={styles.inputContainer}
                 inputContainerStyle={styles.inputContainerStyle}
                 inputStyle={styles.input}
-                onChangeText={onChangeText} />
+                onChangeText={onChangeText}/>
         </View>
     )
 }
@@ -30,9 +31,7 @@ const styles = StyleSheet.create({
     inputContainer: {
         alignItems: 'baseline'
     },
-    inputContainerStyle: {
-
-    },
+    inputContainerStyle: {},
     input: {
         borderBottomWidth: 1,
         borderBottomColor: "#404040",

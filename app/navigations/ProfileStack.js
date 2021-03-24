@@ -4,6 +4,7 @@ import Header from './../components/Header'
 import Profile from './../screens/Profile/Profile'
 import Login from './../screens/Profile/Login'
 import RegisterData from './../screens/Profile/RegisterData'
+import UserLogged from "../screens/Profile/UserLogged";
 
 const Stack = createStackNavigator();
 
@@ -35,18 +36,21 @@ function ProfileStack() {
                 component={Profile}
                 options={{ title: 'Mi perfil' }} />
             <Stack.Screen name="register-mail">
-                {props => <RegisterData {...props} nextScreen="register-name" type="email" />}
+                {props => <RegisterData {...props} label="¿Cual es tu mail?" nextScreen="register-name" type="email" />}
             </Stack.Screen>
             <Stack.Screen name="register-name">
-                {props => <RegisterData {...props} nextScreen="register-password" type="name" />}
+                {props => <RegisterData {...props} label="¿Cual es tu nombre?" nextScreen="register-password" type="name" />}
             </Stack.Screen>
             <Stack.Screen name="register-password">
-                {props => <RegisterData {...props} type="password" />}
+                {props => <RegisterData {...props} label="¿Cual es tu contraseña?" type="password" />}
             </Stack.Screen>
             <Stack.Screen
                 name="login"
                 component={Login}
                 options={{ title: 'Iniciar sesión' }} />
+            <Stack.Screen
+                name="user-logged"
+                component={UserLogged}/>
         </Stack.Navigator>
     );
 }

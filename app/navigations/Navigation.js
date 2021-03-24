@@ -5,13 +5,14 @@ import { Icon } from 'react-native-elements'
 import ProductStack from './../navigations/ProductStack'
 import ProfileStack from './../navigations/ProfileStack'
 import CartStack from './../navigations/CartStack'
+import UserLogged from "../screens/Profile/UserLogged";
 
 const Tab = createBottomTabNavigator()
 
 /**
  * Define screen options of navigation.
- * @param {any} route 
- * @param {string} color 
+ * @param {any} route
+ * @param {string} color
  */
 const screenOptions = (route, color = '#3241F0') => {
     let iconName
@@ -60,6 +61,7 @@ export default function Navigation() {
                 <Tab.Screen
                     name="profile"
                     component={ProfileStack}
+                    //component={UserLogged}
                     options={{ title: 'Mi Perfil' }} />
                 <Tab.Screen
                     name="cart"
