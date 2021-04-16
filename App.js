@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import * as Font from 'expo-font'
 import { Platform, Text } from 'react-native'
 import { AppLoading } from 'expo'
 import Navigation from './app/navigations/Navigation'
+import UserState from "./app/context/User/UserState";
 
 const App = () => {
-  const [loadedData, setLoadedData] = useState(false)
+  const [loadedData, setLoadedData] = useState(false);
 
   useEffect(() => {
     const fetchFonts = async () => {
@@ -31,7 +32,11 @@ const App = () => {
     }
   }
 
-  return <Navigation />
+  return (
+    <UserState>
+      <Navigation />
+    </UserState>
+  )
 }
 
 export default App

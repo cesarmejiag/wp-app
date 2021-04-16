@@ -35,7 +35,7 @@ class Fetch {
         }
 
         const response = await fetch(`${Fetch.url}/${endpoint}`, init)
-        return response.json()
+        return response.json();
     }
 
     /**

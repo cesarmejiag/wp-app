@@ -5,6 +5,7 @@ import { Button } from 'react-native-elements'
 import globalStyles from './../../utils/styles'
 
 export default function UserGuest({ navigation }) {
+    // console.log("--------------------UserGuest--------------------------");
     return (
         <ImageBackground
             source={require('./../../../assets/img/background-bottom-large.png')}

@@ -1,13 +1,14 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {Image, ImageBackground, StyleSheet, View} from 'react-native'
 import {Button} from 'react-native-elements'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
 import FormInput from './../../components/Profile/FormInput'
-import Fetch from "../../utils/Fetch";
 
 import globalStyles from './../../utils/styles'
+import UserContext from '../../context/User/UserContext';
 
 export default function RegisterData({route, navigation, label, nextScreen, type}) {
+    const {currentUser, registerUser} = useContext(UserContext);
     const [data, setData] = useState('');
 
     const validate = () => {
@@ -30,16 +31,7 @@ export default function RegisterData({route, navigation, label, nextScreen, type
         if (type !== 'password') {
             navigation.navigate(nextScreen, {...route.params, [type]: data})
         } else {
-
-            Fetch.post('register', {...route.params, [type]: data,c_password:data }, '')
-                .then(async (response) => {
-                    if (response.success) {
-                        navigation.navigate('user-logged')
-                    } else {
-                        console.log(response)
-                    }
-                })
-                .catch(console.log)
+            registerUser({...route.params, [type]: data,c_password:data }, navigation);
         }
     }
 

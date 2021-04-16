@@ -1,9 +1,26 @@
-import React from 'react'
-import { StyleSheet, ScrollView, View, Text, Image } from 'react-native'
+import React, {useContext, useState} from 'react'
+import { StyleSheet, ScrollView, View, Text, Image, Button } from 'react-native'
 import { Divider } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
+import FormInput from '../../components/Profile/FormInput'
+import UserContext from '../../context/User/UserContext';
 
-function Login() {
+function Login({ navigation }) {
+    const {loginUser} = useContext(UserContext);
+    const [data, setData] = useState({email:'', password:''});
+
+    const handleChangeEmail = e => {
+        setData({...data, email:e})
+    };
+    const handleChangePassword = e => {
+        setData({...data, password:e})
+    };
+
+    const handlePress = (e) => {
+        e.preventDefault();
+        loginUser(data, navigation);
+    }
+
     return (
         <ScrollView>
             <Image
@@ -12,7 +29,18 @@ function Login() {
                 style={styles.logo} />
             <View style={styles.viewContainer}>
                 <Text>Login Form</Text>
+                <FormInput
+                        secureTextEntry={false}
+                        label={'Email'}
+                        onChangeText={handleChangeEmail}/>                
+                <FormInput
+                        secureTextEntry={true}
+                        label={'Password'}
+                        onChangeText={handleChangePassword}/>
                 <CreateAccount />
+                <Button
+                        title="Acceder"
+                        onPress={handlePress}/>
             </View>
             <Divider style={styles.divider} />
             <Text>Social Login</Text>

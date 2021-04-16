@@ -1,16 +1,27 @@
-import React, {useState} from 'react'
-import {View, Text, ScrollView, StyleSheet, ImageBackground} from 'react-native'
+import React, {useState, useContext} from 'react'
+import {View, Text, ScrollView, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native'
 import {Avatar, Icon} from "react-native-elements";
+import UserContext from '../../context/User/UserContext';
 
 const options = [
-    {link: '', label: 'Revisar Perfil'},
-    {link: '', label: 'Mis pedidos'},
-    {link: '', label: 'Preguntas frecuentes'},
-    {link: '', label: 'Cerrar sesion'},
+    {link: '1', label: 'Revisar Perfil'},
+    {link: '2', label: 'Mis pedidos'},
+    {link: '3', label: 'Preguntas frecuentes'},
+    // {link: '', label: 'Cerrar sesion'},
 
 ]
 
-function UserLogged() {
+function UserLogged({navigation}) {
+    const {currentUser, logoutUser} = useContext(UserContext);
+    // console.log("--------------------UserLogged--------------------------");
+    // console.log(currentUser);
+    const imageProfile = currentUser ? currentUser.data.user.profile_photo_url : 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg';
+
+    const handlePress = (e) => {
+        e.preventDefault();
+        logoutUser(navigation);
+    }
+    // const imageProfile = 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg';
     return (
         <ImageBackground
             source={require('./../../../assets/img/background-top-large.png')}
@@ -25,8 +36,7 @@ function UserLogged() {
                             rounded
                             size="xlarge"
                             source={{
-                                uri:
-                                    'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+                                uri: imageProfile,
                             }}
                         />
                     </View>
@@ -35,13 +45,18 @@ function UserLogged() {
 
 
                 <View style={styles.optionsContainer}>
-                    {options.map(({label}) => (
-                        <View style={styles.options}>
+                    {options.map(({label, link}) => ( 
+                        <View key={link} style={styles.options}>
                             <Text style={styles.textOptions}>{label}</Text>
                             <Icon type="material-community" name="chevron-right" size={32} color="#000" />
                         </View>
                     ))}
-
+                    <TouchableOpacity key="4" onPress={handlePress}> 
+                        <View style={styles.options}>
+                                <Text style={styles.textOptions}>Cerrar sesión</Text>
+                                <Icon type="material-community" name="chevron-right" size={32} color="#000" />
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         </ImageBackground>

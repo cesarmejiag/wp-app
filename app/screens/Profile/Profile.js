@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Loader from './../../components/Loader'
 import UserGuest from './UserGuest'
 import UserLogged from './UserLogged'
+import UserContext from '../../context/User/UserContext';
 
 export default Profile = ({ navigation }) => {
-    const [logged, setLogged] = useState(false)
+    const {currentUser} = useContext(UserContext);
+
+    // const [logged, setLogged] = useState(false)
     const [loading, setLoading] = useState(false)
 
     if (loading) {
         return <Loader isVisible={loading} text="Cargando..." />
     }
 
-    return logged ? <UserLogged /> : <UserGuest navigation={navigation} />
+    // console.log("--------------------Profile--------------------------");
+    // console.log(currentUser);
+
+    return currentUser ? <UserLogged navigation={navigation}/> : <UserGuest navigation={navigation} />
 }

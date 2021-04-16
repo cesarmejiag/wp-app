@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useContext} from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Icon } from 'react-native-elements'
@@ -6,6 +6,8 @@ import ProductStack from './../navigations/ProductStack'
 import ProfileStack from './../navigations/ProfileStack'
 import CartStack from './../navigations/CartStack'
 import UserLogged from "../screens/Profile/UserLogged";
+import UserContext from '../context/User/UserContext';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Tab = createBottomTabNavigator()
 
@@ -40,11 +42,23 @@ const screenOptions = (route, color = '#3241F0') => {
  * Create Navigation component.
  * @returns {JSX}
  */
-export default function Navigation() {
-    return (
-        <NavigationContainer>
+
+ class Navigation extends React.Component {
+    static contextType = UserContext
+    constructor(props) {
+      super(props);
+      
+    }
+
+    componentWillMount() {
+        this.context.initCredential();
+    }
+  
+    render() {
+        
+        return(<NavigationContainer>
             <Tab.Navigator
-                initialRouteName="product-list"
+                initialRouteName="profile"
                 tabBarOptions={{
                     activeTintColor: "#717171",
                     activeBackgroundColor: "#ffffff",
@@ -68,6 +82,45 @@ export default function Navigation() {
                     component={CartStack}
                     options={{ title: 'Carrito' }} />
             </Tab.Navigator>
-        </NavigationContainer>
-    )
-}
+        </NavigationContainer>)
+    }
+  }
+
+  export default  Navigation;
+// export default function Navigation() {
+//     const {currentUser, initCredential} = useContext(UserContext);
+
+//     // useEffect(() => {
+//     //     initCredential();
+//     //   }, [])
+
+//     return (
+//         <NavigationContainer>
+//             <Tab.Navigator
+//                 initialRouteName="profile"
+//                 tabBarOptions={{
+//                     activeTintColor: "#717171",
+//                     activeBackgroundColor: "#ffffff",
+//                     inactiveTintColor: "#717171",
+//                     inactiveBackgroundColor: "#ffffff",
+//                 }}
+//                 screenOptions={({ route }) => ({
+//                     tabBarIcon: ({ color }) => screenOptions(route)
+//                 })}>
+//                 <Tab.Screen
+//                     name="product-list"
+//                     component={ProductStack}
+//                     options={{ title: 'Inicio' }} />
+//                 <Tab.Screen
+//                     name="profile"
+//                     component={ProfileStack}
+//                     //component={UserLogged}
+//                     options={{ title: 'Mi Perfil' }} />
+//                 <Tab.Screen
+//                     name="cart"
+//                     component={CartStack}
+//                     options={{ title: 'Carrito' }} />
+//             </Tab.Navigator>
+//         </NavigationContainer>
+//     )
+// }
