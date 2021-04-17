@@ -1,4 +1,4 @@
-import React, {useReducer, useContext} from 'react';
+import React, {useReducer, useContext, useState} from 'react';
 import UserReducer from './userReducer';
 import UserContext from './UserContext';
 import Fetch from "../../utils/Fetch";
@@ -14,6 +14,7 @@ const UserState = (props) => {
     
     const {showAlert} = useContext(GlobalContext);
     const [state, dispatch] = useReducer(UserReducer, initialState);
+    const [loadingState, showLoading] = useState(false);
     
     const initCredential = async() => {
         try {
@@ -40,8 +41,10 @@ const UserState = (props) => {
                 type: 'SET_PROFILE',
                 payload: info
             });
+            showLoading(false);
             navigation.navigate('user-logged');
         } catch (err) { 
+            showLoading(false);
             console.log('Can\'t save user credential', err); 
             showAlert('Can\'t save user credential');
         }
@@ -49,41 +52,56 @@ const UserState = (props) => {
 
     const clearCredential = async (navigation) => {
         try {
+            showLoading(true);
             await AsyncStorage.setItem(KEY, '');
             dispatch({
                 type: 'SET_PROFILE',
                 payload: null
             });
+            showLoading(false);
             navigation.navigate('profile');
         } catch (err) { 
+            showLoading(false);
             console.log('Can\'t clear user credential', err);
             showAlert('Can\'t clear user credential');
         }
     }
 
     const registerUser = (data, navigation) => {
+        showLoading(true);
         Fetch.post('register', data, '').then(response => {
             if (response.success) {
                 saveCredential(response, navigation);
             } else {
                 console.log(response);
                 showAlert(response.message);
+                showLoading(false);
             }
         })
-        .catch(console.log)
+        .catch(err => {
+            console.log(err);
+            showAlert(err.message);
+            showLoading(false);
+        })
         
     };
 
     const loginUser = (data, navigation) => {
+        showLoading(true);
         Fetch.post('login', data, '').then(response => {
             if (response.success) {
                 saveCredential(response, navigation);
             } else {
                 console.log(response);
                 showAlert(response.message);
+                showLoading(false);
             }
         })
-        .catch(console.log)
+        .catch(err => {
+            console.log(err);
+            showAlert(err.message);
+            showLoading(false);
+        })
        
     };
 
@@ -94,6 +112,7 @@ const UserState = (props) => {
     return (
         <UserContext.Provider value={{
             currentUser: state.currentUser,
+            loadingState,
             initCredential,
             registerUser,
             loginUser,

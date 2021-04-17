@@ -3,12 +3,13 @@ import {Image, ImageBackground, StyleSheet, View} from 'react-native'
 import {Button} from 'react-native-elements'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
 import FormInput from './../../components/Profile/FormInput'
+import Loader from '../../components/Loader'
 
 import globalStyles from './../../utils/styles'
 import UserContext from '../../context/User/UserContext';
 
 export default function RegisterData({route, navigation, label, nextScreen, type}) {
-    const {currentUser, registerUser} = useContext(UserContext);
+    const {currentUser, registerUser, loadingState} = useContext(UserContext);
     const [data, setData] = useState('');
 
     const validate = () => {
@@ -36,31 +37,34 @@ export default function RegisterData({route, navigation, label, nextScreen, type
     }
 
     return (
-        <ImageBackground
-            source={require('./../../../assets/img/background-bottom-large.png')}
-            style={styles.imageBackground}>
-            <KeyboardAwareScrollView>
-                <View style={styles.container}>
-                    <Image
-                        source={require('./../../../assets/img/logo-color.png')}
-                        resizeMode="contain"
-                        style={styles.image}/>
+        <>
+            <ImageBackground
+                source={require('./../../../assets/img/background-bottom-large.png')}
+                style={styles.imageBackground}>
+                <KeyboardAwareScrollView>
+                    <View style={styles.container}>
+                        <Image
+                            source={require('./../../../assets/img/logo-color.png')}
+                            resizeMode="contain"
+                            style={styles.image}/>
 
-                    <FormInput
-                        secureTextEntry={type === 'password'}
-                        label={label}
-                        onChangeText={setData}/>
+                        <FormInput
+                            secureTextEntry={type === 'password'}
+                            label={label}
+                            onChangeText={setData}/>
 
-                    <Button
-                        title="Continuar"
-                        disabled={!validate()}
-                        buttonStyle={globalStyles.btn}
-                        containerStyle={globalStyles.btnContainer}
-                        titleStyle={globalStyles.btnTitle}
-                        onPress={handlePress}/>
-                </View>
-            </KeyboardAwareScrollView>
-        </ImageBackground>
+                        <Button
+                            title="Continuar"
+                            disabled={!validate()}
+                            buttonStyle={globalStyles.btn}
+                            containerStyle={globalStyles.btnContainer}
+                            titleStyle={globalStyles.btnTitle}
+                            onPress={handlePress}/>
+                    </View>
+                </KeyboardAwareScrollView>
+            </ImageBackground>
+            <Loader isVisible={loadingState} text="Cargando..." />
+        </>
     )
 }
 

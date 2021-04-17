@@ -11,7 +11,7 @@ const GlobalState = (props) => {
     
     const showAlert = (data) => {
         setState({show: true, message: data});
-        setTimeout(hideAlert, 1000*10);
+        setTimeout(hideAlert, 1000*7);
     }
 
     const hideAlert = () => {

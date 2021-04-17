@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react'
 import { StyleSheet, ScrollView, View, Text, Image, ImageBackground } from 'react-native'
+import Loader from '../../components/Loader'
 import { Button } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 import FormInput from '../../components/Profile/FormInput'
@@ -7,7 +8,7 @@ import UserContext from '../../context/User/UserContext';
 import globalStyles from './../../utils/styles'
 
 function Login({ navigation }) {
-    const {loginUser} = useContext(UserContext);
+    const {loginUser, loadingState} = useContext(UserContext);
     const [data, setData] = useState({email:'', password:''});
 
     const handleChangeEmail = e => {
@@ -23,34 +24,37 @@ function Login({ navigation }) {
     }
 
     return (
-        <ImageBackground 
-        source={require('../../../assets/img/background-bottom-large.png')}
-        style={styles.imageBackground}>
-            <ScrollView>
-                <Image
-                    resizeMode="contain"
-                    source={require('./../../../assets/img/logo.png')}
-                    style={styles.logo} />
-                <View style={styles.viewContainer}>
-                    <Text style={styles.titleForm}>Acceso</Text>
-                    <FormInput
-                            secureTextEntry={false}
-                            label={'Correo'}
-                            onChangeText={handleChangeEmail}/>                
-                    <FormInput
-                            secureTextEntry={true}
-                            label={'Contraseña'}
-                            onChangeText={handleChangePassword}/>
-                    <Button
-                            buttonStyle={globalStyles.btn}
-                            containerStyle={globalStyles.btnContainer}
-                            titleStyle={globalStyles.btnTitle}
-                            title="Acceder"
-                            onPress={handlePress}/>
-                    <CreateAccount />
-                </View>
-            </ScrollView>
-        </ImageBackground>
+        <>
+            <ImageBackground 
+            source={require('../../../assets/img/background-bottom-large.png')}
+            style={styles.imageBackground}>
+                <ScrollView>
+                    <Image
+                        resizeMode="contain"
+                        source={require('./../../../assets/img/logo.png')}
+                        style={styles.logo} />
+                    <View style={styles.viewContainer}>
+                        <Text style={styles.titleForm}>Acceso</Text>
+                        <FormInput
+                                secureTextEntry={false}
+                                label={'Correo'}
+                                onChangeText={handleChangeEmail}/>                
+                        <FormInput
+                                secureTextEntry={true}
+                                label={'Contraseña'}
+                                onChangeText={handleChangePassword}/>
+                        <Button
+                                buttonStyle={globalStyles.btn}
+                                containerStyle={globalStyles.btnContainer}
+                                titleStyle={globalStyles.btnTitle}
+                                title="Acceder"
+                                onPress={handlePress}/>
+                        <CreateAccount />
+                    </View>
+                </ScrollView>
+            </ImageBackground>
+            <Loader isVisible={loadingState} text="Cargando..." />
+        </>
     )
 }
 
