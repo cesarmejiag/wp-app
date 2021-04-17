@@ -7,7 +7,9 @@ import ProfileStack from './../navigations/ProfileStack'
 import CartStack from './../navigations/CartStack'
 import UserLogged from "../screens/Profile/UserLogged";
 import UserContext from '../context/User/UserContext';
+import GlobalContext from '../context/Global/GlobalContext';
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import SnackBar from 'react-native-snackbar-component'
 
 const Tab = createBottomTabNavigator()
 
@@ -43,84 +45,93 @@ const screenOptions = (route, color = '#3241F0') => {
  * @returns {JSX}
  */
 
- class Navigation extends React.Component {
-    static contextType = UserContext
-    constructor(props) {
-      super(props);
+//  class Navigation extends React.Component {
+//     static contextType = UserContext
+    
+//     constructor(props) {
+//       super(props);
       
-    }
+//     }
 
-    componentWillMount() {
-        this.context.initCredential();
-    }
+//     componentWillMount() {
+//         this.context.initCredential();
+//     }
   
-    render() {
+//     render() {
         
-        return(<NavigationContainer>
-            <Tab.Navigator
-                initialRouteName="profile"
-                tabBarOptions={{
-                    activeTintColor: "#717171",
-                    activeBackgroundColor: "#ffffff",
-                    inactiveTintColor: "#717171",
-                    inactiveBackgroundColor: "#ffffff",
-                }}
-                screenOptions={({ route }) => ({
-                    tabBarIcon: ({ color }) => screenOptions(route)
-                })}>
-                <Tab.Screen
-                    name="product-list"
-                    component={ProductStack}
-                    options={{ title: 'Inicio' }} />
-                <Tab.Screen
-                    name="profile"
-                    component={ProfileStack}
-                    //component={UserLogged}
-                    options={{ title: 'Mi Perfil' }} />
-                <Tab.Screen
-                    name="cart"
-                    component={CartStack}
-                    options={{ title: 'Carrito' }} />
-            </Tab.Navigator>
-        </NavigationContainer>)
-    }
-  }
+//         return(
+//         <>
+//             <NavigationContainer>
+//                 <Tab.Navigator
+//                     initialRouteName="profile"
+//                     tabBarOptions={{
+//                         activeTintColor: "#717171",
+//                         activeBackgroundColor: "#ffffff",
+//                         inactiveTintColor: "#717171",
+//                         inactiveBackgroundColor: "#ffffff",
+//                     }}
+//                     screenOptions={({ route }) => ({
+//                         tabBarIcon: ({ color }) => screenOptions(route)
+//                     })}>
+//                     <Tab.Screen
+//                         name="product-list"
+//                         component={ProductStack}
+//                         options={{ title: 'Inicio' }} />
+//                     <Tab.Screen
+//                         name="profile"
+//                         component={ProfileStack}
+//                         //component={UserLogged}
+//                         options={{ title: 'Mi Perfil' }} />
+//                     <Tab.Screen
+//                         name="cart"
+//                         component={CartStack}
+//                         options={{ title: 'Carrito' }} />
+//                 </Tab.Navigator>
+//             </NavigationContainer>
+//             <SnackBar visible={true} textMessage="Hello There!" bottom={50} />
+//         </>)
+//     }
+//   }
 
-  export default  Navigation;
-// export default function Navigation() {
-//     const {currentUser, initCredential} = useContext(UserContext);
+//   export default  Navigation;
+export default function Navigation() {
+    const {currentUser, initCredential} = useContext(UserContext);
+    const {show, message} = useContext(GlobalContext);
 
-//     // useEffect(() => {
-//     //     initCredential();
-//     //   }, [])
+    useEffect(() => {
+        initCredential();
+      }, [])
 
-//     return (
-//         <NavigationContainer>
-//             <Tab.Navigator
-//                 initialRouteName="profile"
-//                 tabBarOptions={{
-//                     activeTintColor: "#717171",
-//                     activeBackgroundColor: "#ffffff",
-//                     inactiveTintColor: "#717171",
-//                     inactiveBackgroundColor: "#ffffff",
-//                 }}
-//                 screenOptions={({ route }) => ({
-//                     tabBarIcon: ({ color }) => screenOptions(route)
-//                 })}>
-//                 <Tab.Screen
-//                     name="product-list"
-//                     component={ProductStack}
-//                     options={{ title: 'Inicio' }} />
-//                 <Tab.Screen
-//                     name="profile"
-//                     component={ProfileStack}
-//                     //component={UserLogged}
-//                     options={{ title: 'Mi Perfil' }} />
-//                 <Tab.Screen
-//                     name="cart"
-//                     component={CartStack}
-//                     options={{ title: 'Carrito' }} />
-//             </Tab.Navigator>
-//         </NavigationContainer>
-//     )
-// }
+    return (
+        <>
+            <NavigationContainer>
+                <Tab.Navigator
+                    initialRouteName="profile"
+                    tabBarOptions={{
+                        activeTintColor: "#717171",
+                        activeBackgroundColor: "#ffffff",
+                        inactiveTintColor: "#717171",
+                        inactiveBackgroundColor: "#ffffff",
+                    }}
+                    screenOptions={({ route }) => ({
+                        tabBarIcon: ({ color }) => screenOptions(route)
+                    })}>
+                    <Tab.Screen
+                        name="product-list"
+                        component={ProductStack}
+                        options={{ title: 'Inicio' }} />
+                    <Tab.Screen
+                        name="profile"
+                        component={ProfileStack}
+                        //component={UserLogged}
+                        options={{ title: 'Mi Perfil' }} />
+                    <Tab.Screen
+                        name="cart"
+                        component={CartStack}
+                        options={{ title: 'Carrito' }} />
+                </Tab.Navigator>
+            </NavigationContainer>
+            <SnackBar visible={show} textMessage={message} bottom={50} />
+        </>
+    )
+}

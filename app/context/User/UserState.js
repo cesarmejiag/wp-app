@@ -1,8 +1,9 @@
-import React, {useReducer} from 'react';
+import React, {useReducer, useContext} from 'react';
 import UserReducer from './userReducer';
 import UserContext from './UserContext';
 import Fetch from "../../utils/Fetch";
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import GlobalContext from '../Global/GlobalContext';
 
 const KEY = 'credential';
 
@@ -11,6 +12,7 @@ const UserState = (props) => {
         currentUser: null
     };
     
+    const {showAlert} = useContext(GlobalContext);
     const [state, dispatch] = useReducer(UserReducer, initialState);
     
     const initCredential = async() => {
@@ -25,7 +27,10 @@ const UserState = (props) => {
                     payload: JSON.parse(json)
                 });
             }
-        } catch (err) { console.log('Can\'t get user credential', err); }
+        } catch (err) { 
+            console.log('Can\'t get user credential', err);
+            showAlert('Can\'t get user credential'); 
+        }
     }
 
     const saveCredential = async (info, navigation) => {
@@ -36,7 +41,10 @@ const UserState = (props) => {
                 payload: info
             });
             navigation.navigate('user-logged');
-        } catch (err) { console.log('Can\'t save user credential', err); }
+        } catch (err) { 
+            console.log('Can\'t save user credential', err); 
+            showAlert('Can\'t save user credential');
+        }
     }
 
     const clearCredential = async (navigation) => {
@@ -47,7 +55,10 @@ const UserState = (props) => {
                 payload: null
             });
             navigation.navigate('profile');
-        } catch (err) { console.log('Can\'t clear user credential', err) }
+        } catch (err) { 
+            console.log('Can\'t clear user credential', err);
+            showAlert('Can\'t clear user credential');
+        }
     }
 
     const registerUser = (data, navigation) => {
@@ -56,6 +67,7 @@ const UserState = (props) => {
                 saveCredential(response, navigation);
             } else {
                 console.log(response);
+                showAlert(response.message);
             }
         })
         .catch(console.log)
@@ -68,6 +80,7 @@ const UserState = (props) => {
                 saveCredential(response, navigation);
             } else {
                 console.log(response);
+                showAlert(response.message);
             }
         })
         .catch(console.log)

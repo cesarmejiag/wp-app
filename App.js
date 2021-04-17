@@ -4,6 +4,7 @@ import { Platform, Text } from 'react-native'
 import { AppLoading } from 'expo'
 import Navigation from './app/navigations/Navigation'
 import UserState from "./app/context/User/UserState";
+import GlobalState from "./app/context/Global/GlobalState";
 
 const App = () => {
   const [loadedData, setLoadedData] = useState(false);
@@ -33,9 +34,11 @@ const App = () => {
   }
 
   return (
-    <UserState>
-      <Navigation />
-    </UserState>
+    <GlobalState>
+      <UserState>
+        <Navigation />
+      </UserState>
+    </GlobalState>
   )
 }
 
