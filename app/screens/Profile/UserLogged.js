@@ -15,7 +15,20 @@ function UserLogged({navigation}) {
     const {currentUser, logoutUser} = useContext(UserContext);
     // console.log("--------------------UserLogged--------------------------");
     // console.log(currentUser);
-    const imageProfile = currentUser ? currentUser.data.user.profile_photo_url : 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg';
+    let imageProfile;
+    if (currentUser && currentUser.typelogin == "FACEBOOK") {
+        imageProfile = currentUser.picture.data.url;
+    } 
+    else if (currentUser && currentUser.typelogin == "NORMAL") {
+        imageProfile = currentUser.data.user.profile_photo_url;
+    }
+    else if (currentUser && currentUser.typelogin == "GOOGLE") {
+        imageProfile = currentUser.user.photoUrl;
+    }
+    else {
+        imageProfile = 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg';
+    }
+    // const imageProfile = currentUser ? currentUser.data.user.profile_photo_url : 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg';
 
     const handlePress = (e) => {
         e.preventDefault();

@@ -74,6 +74,7 @@ class ImageBrowser extends Component {
     }
 
     onOrientationChange = ({ orientationInfo }) => {
+        console.log(orientationInfo);
         ScreenOrientation.removeOrientationChangeListeners()
         ScreenOrientation.addOrientationChangeListener(this.onOrientationChange)
         const numColumns = this.getNumColumns(orientationInfo.orientation)

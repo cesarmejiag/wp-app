@@ -5,6 +5,7 @@ import List from './../screens/Products/List'
 import ProductDetail from './../screens/Products/ProductDetail'
 import ProductProcess from './../screens/Products/ProductProcess'
 import ImageBrowser from './../screens/Browser/BrowserScreen'
+import EditImage from './../screens/Browser/EditImage'
 
 const Stack = createStackNavigator()
 
@@ -45,6 +46,9 @@ export default function ProductStack() {
             <Stack.Screen
                 name="image-browser"
                 component={ImageBrowser} />
+            <Stack.Screen
+                name="image-crop"
+                component={EditImage} />
         </Stack.Navigator>
     )
 }

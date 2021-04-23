@@ -1,14 +1,14 @@
 import React, {useContext, useState} from 'react'
-import { StyleSheet, ScrollView, View, Text, Image, ImageBackground } from 'react-native'
+import { StyleSheet, ScrollView, View, Text, Image, ImageBackground, TouchableOpacity  } from 'react-native'
 import Loader from '../../components/Loader'
-import { Button } from 'react-native-elements'
+import { Button, Icon } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 import FormInput from '../../components/Profile/FormInput'
 import UserContext from '../../context/User/UserContext';
 import globalStyles from './../../utils/styles'
 
 function Login({ navigation }) {
-    const {loginUser, loadingState} = useContext(UserContext);
+    const {loginUser, loadingState, loginFacebook, loginGoogle} = useContext(UserContext);
     const [data, setData] = useState({email:'', password:''});
 
     const handleChangeEmail = e => {
@@ -21,6 +21,16 @@ function Login({ navigation }) {
     const handlePress = (e) => {
         e.preventDefault();
         loginUser(data, navigation);
+    }
+
+    const handlePressFacebook = (e) => {
+        e.preventDefault();
+        loginFacebook(navigation);
+    }
+
+    const handlePressGoogle = (e) => {
+        e.preventDefault();
+        loginGoogle(navigation);
     }
 
     return (
@@ -49,7 +59,18 @@ function Login({ navigation }) {
                                 titleStyle={globalStyles.btnTitle}
                                 title="Acceder"
                                 onPress={handlePress}/>
-                        <CreateAccount />
+                        <TouchableOpacity style={styles.marginButton} onPress={handlePressFacebook}>
+                            <View style={styles.btnFacebook}>
+                                <Icon type="material-community" name="facebook" size={25} color="#FFF" />
+                                <Text style={styles.btnTitleFacebook}>Acceder con Facebook</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={handlePressGoogle}>
+                            <View style={styles.btnGoogle}>
+                                <Icon type="material-community" name="google" size={25} color="#FFF" />
+                                <Text style={styles.btnTitleGoogle}>Acceder con Google</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                 </ScrollView>
             </ImageBackground>
@@ -107,8 +128,53 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontFamily: 'texgyreadventor-bold',
         textTransform: 'uppercase',
-    }
+    },
 
+
+    btnFacebook: {
+        backgroundColor: "#4064ac",
+        borderRadius: 8,
+        height: 36,
+        width: 300,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+    btnTitleFacebook: {
+        color: "#FFFFFF",
+        fontFamily: 'texgyreadventor-bold',
+        fontSize: 14,
+        letterSpacing: 1.4,
+        lineHeight: 18,
+        textTransform: 'uppercase',
+        marginLeft: 10
+    },
+
+
+    btnGoogle: {
+        backgroundColor: "#da3d29",
+        borderRadius: 8,
+        height: 36,
+        width: 300,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+    btnTitleGoogle: {
+        color: "#FFFFFF",
+        fontFamily: 'texgyreadventor-bold',
+        fontSize: 14,
+        letterSpacing: 1.4,
+        lineHeight: 18,
+        textTransform: 'uppercase',
+        marginLeft: 20
+    },
+
+    marginButton: {
+        marginBottom: 20
+    }
 });
 
 export default Login

@@ -22,8 +22,11 @@ const BrowserScreen = ({ navigation }) => {
 
     const handlePress = () => {
         // TODO: Implementar lógica de negocio
-        // - navigation.navigate('product-process')
-        console.log('resources::', resources.length)
+        console.log('resources::', resources)
+        if (resources.length > 0) {
+            navigation.navigate('image-crop', {uri: resources[0].uri})
+        }
+        // console.log('resources::', resources)
     }
 
     return (

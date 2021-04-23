@@ -37,7 +37,7 @@ const ImageTile = ({
     renderSelectedComponent = () => {},
 }) => {
     if (!item) return null
-
+    
     const tileSize = getTileSize(numColumns)
     return (
         <Pressable
