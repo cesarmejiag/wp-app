@@ -3,6 +3,7 @@ import globalStyles from 'utils/styles'
 import { StyleSheet, Image, Button, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import { Divider } from 'react-native-elements'
 import Formatter from '../../utils/Formatter';
+import GridList from 'react-native-grid-list';
 
 function EditImage({ route, navigation }) {
 
@@ -24,8 +25,26 @@ function EditImage({ route, navigation }) {
         alert('Button');
     }
 
+    const handlePressImage = (item) => {
+        if (item.thumbnail)
+            alert(item.thumbnail.uri);
+        else
+            alert(item);
+    }
+
+    // const d = photos.map(p => p.uri);
+    // console.log(d);
     const d = photos.map(p => p.uri);
-    console.log(d);
+    const items = [];
+    d.forEach(element => {
+        items.push({ thumbnail: { uri: element } });
+    });
+
+    const renderItem = ({ item, index }) => (
+        <TouchableOpacity onPress={() => handlePressImage(item)}>
+            <Image style={styles.imageCollage} source={item.thumbnail} />
+        </TouchableOpacity>
+    );
 
     return(
         <>
@@ -52,12 +71,22 @@ function EditImage({ route, navigation }) {
             {isFullPic ? 
                 <ScrollView style={styles.scroll} contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>
                     {photos.map((photo, id) => (
-                        <View key={id} style={styles.contentImage}>
+                        <TouchableOpacity key={id} style={styles.contentImage} onPress={() => handlePressImage(photo.uri)}>
+                            {/* <View  >
+                                <Image style={styles.image} source={{ uri: photo.uri}} />
+                            </View> */}
                             <Image style={styles.image} source={{ uri: photo.uri}} />
-                        </View>
+                        </TouchableOpacity>
                     ))}
                 </ScrollView> : 
-                <Text>Hola</Text>
+                <View style={styles.containerCollage}>
+                    <GridList
+                    showSeparator
+                    data={items}
+                    numColumns={3}
+                    renderItem={renderItem}
+                    />
+                </View>
             }
             
             
@@ -153,6 +182,17 @@ const styles = StyleSheet.create({
     dividerButton: {
         backgroundColor: '#d0d0d0',
         height: 3
+    },
+
+
+    containerCollage: {
+        flex: 1,
+        backgroundColor: 'white',
+    },
+    imageCollage: {
+        width: '100%',
+        height: '100%',
+        borderRadius: 10,
     },
 });
 
