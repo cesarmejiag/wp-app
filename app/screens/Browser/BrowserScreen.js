@@ -5,7 +5,8 @@ import { Button } from 'react-native-elements'
 import globalStyles from 'utils/styles'
 import { PADDING_WRAP_SIZE } from 'constants/config'
 
-const BrowserScreen = ({ navigation }) => {
+const BrowserScreen = ({ navigation, route }) => {
+    const item = route.params.item;
     const emptyStayComponent = <Text>Empty</Text>
 
     const [resources, setResources] = useState([])
@@ -22,9 +23,9 @@ const BrowserScreen = ({ navigation }) => {
 
     const handlePress = () => {
         // TODO: Implementar lógica de negocio
-        console.log('resources::', resources)
+        // console.log('resources::', resources)
         if (resources.length > 0) {
-            navigation.navigate('image-crop', {uri: resources[0].uri})
+            navigation.navigate('image-crop', {photos: resources, item})
         }
         // console.log('resources::', resources)
     }

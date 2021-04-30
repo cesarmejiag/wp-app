@@ -11,7 +11,7 @@ export default function CartScreen({ navigation }) {
 
     return (
         <ImageBackground
-            source={require('./../../../assets/img/background-bottom-small.png')}
+            source={require('../../../assets/img/background-bottom-small.png')}
             style={styles.imageBackground}>
             <View style={styles.container}>
                 <CartList

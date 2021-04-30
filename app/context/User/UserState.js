@@ -160,7 +160,7 @@ const UserState = (props) => {
                     });
                     if (type === 'success') {
                         // Facebook Graph API
-                        const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture`);
+                        const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture,first_name,last_name`);
                         let data = await response.json();
                         saveCredential('FACEBOOK', data, navigation);
                         

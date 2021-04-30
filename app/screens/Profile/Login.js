@@ -53,22 +53,22 @@ function Login({ navigation }) {
                                 secureTextEntry={true}
                                 label={'Contraseña'}
                                 onChangeText={handleChangePassword}/>
-                        <Button
-                                buttonStyle={globalStyles.btn}
-                                containerStyle={globalStyles.btnContainer}
-                                titleStyle={globalStyles.btnTitle}
-                                title="Acceder"
-                                onPress={handlePress}/>
+                        <TouchableOpacity style={styles.marginButton} onPress={handlePress}>
+                            <View style={styles.btnNormal}>
+                                <Icon type="material-community" name="email" size={25} color="#f9ce50" />
+                                <Text style={styles.btnTitleNormal}>Continuar con mi mail</Text>
+                            </View>
+                        </TouchableOpacity>
                         <TouchableOpacity style={styles.marginButton} onPress={handlePressFacebook}>
                             <View style={styles.btnFacebook}>
-                                <Icon type="material-community" name="facebook" size={25} color="#FFF" />
-                                <Text style={styles.btnTitleFacebook}>Acceder con Facebook</Text>
+                                <Icon type="material-community" name="facebook" size={25} color="#318cd4" />
+                                <Text style={styles.btnTitleFacebook}>Continuar con Facebook</Text>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={handlePressGoogle}>
                             <View style={styles.btnGoogle}>
-                                <Icon type="material-community" name="google" size={25} color="#FFF" />
-                                <Text style={styles.btnTitleGoogle}>Acceder con Google</Text>
+                                <Icon type="material-community" name="google" size={25} color="#f75b28" />
+                                <Text style={styles.btnTitleGoogle}>Continuar con Google</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -132,43 +132,67 @@ const styles = StyleSheet.create({
 
 
     btnFacebook: {
-        backgroundColor: "#4064ac",
+        backgroundColor: "#ffff",
         borderRadius: 8,
+        borderColor: "#4A4A4A",
+        borderWidth: 1,
         height: 36,
-        width: 300,
+        width: 270,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row'
     },
     btnTitleFacebook: {
-        color: "#FFFFFF",
+        color: "#4A4A4A",
         fontFamily: 'texgyreadventor-bold',
         fontSize: 14,
         letterSpacing: 1.4,
         lineHeight: 18,
-        textTransform: 'uppercase',
         marginLeft: 10
     },
 
 
     btnGoogle: {
-        backgroundColor: "#da3d29",
+        backgroundColor: "#ffff",
         borderRadius: 8,
+        borderColor: "#4A4A4A",
+        borderWidth: 1,
         height: 36,
-        width: 300,
+        width: 270,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row'
     },
     btnTitleGoogle: {
-        color: "#FFFFFF",
+        color: "#4A4A4A",
         fontFamily: 'texgyreadventor-bold',
         fontSize: 14,
         letterSpacing: 1.4,
         lineHeight: 18,
-        textTransform: 'uppercase',
+        marginLeft: 20
+    },
+
+
+    btnNormal: {
+        backgroundColor: "#ffff",
+        borderRadius: 8,
+        borderColor: "#4A4A4A",
+        borderWidth: 1,
+        height: 36,
+        width: 270,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+    btnTitleNormal: {
+        color: "#4A4A4A",
+        fontFamily: 'texgyreadventor-bold',
+        fontSize: 14,
+        letterSpacing: 1.4,
+        lineHeight: 18,
         marginLeft: 20
     },
 

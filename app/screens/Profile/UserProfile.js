@@ -3,43 +3,37 @@ import {View, Text, ScrollView, StyleSheet, ImageBackground, TouchableOpacity } 
 import {Avatar, Icon} from "react-native-elements";
 import UserContext from '../../context/User/UserContext';
 
-const options = [
-    // {link: '1', label: 'Revisar Perfil'},
-    {link: '2', label: 'Mis pedidos'},
-    {link: '3', label: 'Preguntas frecuentes'},
-    // {link: '', label: 'Cerrar sesion'},
-
-]
-
-function UserLogged({navigation}) {
+function UserProfile({navigation}) {
     const {currentUser, logoutUser} = useContext(UserContext);
     // console.log("--------------------UserLogged--------------------------");
     // console.log(currentUser);
     let imageProfile;
+    let username = 'Nombre';
+    let lastname = 'Apellidos';
+    let email = 'Email';
+    let birthdate = 'Fecha de nacimiento';
     if (currentUser && currentUser.typelogin == "FACEBOOK") {
         imageProfile = currentUser.picture.data.url;
+        username = currentUser.first_name;
+        lastname = currentUser.last_name;
     } 
     else if (currentUser && currentUser.typelogin == "NORMAL") {
         imageProfile = currentUser.data.user.profile_photo_url;
+        username = currentUser.data.first_name;
+        lastname = currentUser.data.last_name;
+        email = currentUser.data.email;
+        birthdate = currentUser.data.birth_date;
     }
     else if (currentUser && currentUser.typelogin == "GOOGLE") {
         imageProfile = currentUser.user.photoUrl;
+        username = currentUser.user.givenName;
+        lastname = currentUser.user.familyName;
+        email = currentUser.user.email;
     }
     else {
         imageProfile = 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg';
     }
-    // const imageProfile = currentUser ? currentUser.data.user.profile_photo_url : 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg';
-    
-    const handlePressShowProfile = (e) => {
-        e.preventDefault();
-        navigation.navigate('user-profile');
-    }
 
-    const handlePressLogOut = (e) => {
-        e.preventDefault();
-        logoutUser(navigation);
-    }
-    // const imageProfile = 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg';
     return (
         <ImageBackground
             source={require('./../../../assets/img/background-top-large.png')}
@@ -63,24 +57,20 @@ function UserLogged({navigation}) {
 
 
                 <View style={styles.optionsContainer}>
-                    <TouchableOpacity key="1" onPress={handlePressShowProfile}> 
-                        <View style={styles.options}>
-                                <Text style={styles.textOptions}>Revisar Perfil</Text>
-                                <Icon type="material-community" name="chevron-right" size={32} color="#000" />
-                        </View>
-                    </TouchableOpacity>
-                    {options.map(({label, link}) => ( 
-                        <View key={link} style={styles.options}>
-                            <Text style={styles.textOptions}>{label}</Text>
-                            <Icon type="material-community" name="chevron-right" size={32} color="#000" />
-                        </View>
-                    ))}
-                    <TouchableOpacity key="4" onPress={handlePressLogOut}> 
-                        <View style={styles.options}>
-                                <Text style={styles.textOptions}>Cerrar sesión</Text>
-                                <Icon type="material-community" name="chevron-right" size={32} color="#000" />
-                        </View>
-                    </TouchableOpacity>
+                    <View style={styles.options}>
+                        <Text style={styles.textOptions}>{username}</Text>
+                        <Text style={styles.textOptions2}>{lastname}</Text>
+                    </View>
+                </View>
+                <View style={styles.optionsContainer}>
+                    <View style={styles.options}>
+                        <Text style={styles.textOptions}>{email}</Text>
+                    </View>
+                </View>
+                <View style={styles.optionsContainer}>
+                    <View style={styles.options}>
+                        <Text style={styles.textOptions}>{birthdate}</Text>
+                    </View>
                 </View>
             </ScrollView>
         </ImageBackground>
@@ -92,7 +82,7 @@ const styles = StyleSheet.create({
     avatarContainer: {
         marginTop: 70,
         alignItems: 'center',
-        marginBottom: 130,
+        marginBottom: 145,
     },
     avatar:{
         width:288,
@@ -109,12 +99,9 @@ const styles = StyleSheet.create({
 
     options: {
         flexDirection:'row',
-        justifyContent:'space-between',
+        justifyContent:'flex-start',
         alignItems:'center',
-        width: 275,
-        paddingTop: 15,
-        paddingBottom: 15,
-        paddingLeft: 15,
+        width: 400,
         borderBottomColor: '#4A4A4A',
         borderBottomWidth: 1,
     },
@@ -122,7 +109,22 @@ const styles = StyleSheet.create({
         color: '#4A4A4A',
         fontSize: 20,
         textAlign: 'left',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        paddingTop: 15,
+        paddingBottom: 15,
+        paddingLeft: 15,
+        paddingRight: 25
+    },
+    textOptions2: {
+        color: '#4A4A4A',
+        fontSize: 20,
+        textAlign: 'left',
+        fontWeight: 'bold',
+        borderLeftColor: '#4A4A4A',
+        borderLeftWidth: 1,
+        paddingTop: 15,
+        paddingBottom: 15,
+        paddingLeft: 15,
     },
     imageBackground: {
         backgroundColor: '#fff',
@@ -141,4 +143,4 @@ const styles = StyleSheet.create({
         width: 130
     }
 })
-export default UserLogged
+export default UserProfile

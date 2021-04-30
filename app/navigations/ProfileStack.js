@@ -5,6 +5,7 @@ import Profile from './../screens/Profile/Profile'
 import Login from './../screens/Profile/Login'
 import RegisterData from './../screens/Profile/RegisterData'
 import UserLogged from "../screens/Profile/UserLogged";
+import UserProfile from "../screens/Profile/UserProfile";
 
 const Stack = createStackNavigator();
 
@@ -51,6 +52,9 @@ function ProfileStack() {
             <Stack.Screen
                 name="user-logged"
                 component={UserLogged}/>
+            <Stack.Screen
+                name="user-profile"
+                component={UserProfile}/>
         </Stack.Navigator>
     );
 }

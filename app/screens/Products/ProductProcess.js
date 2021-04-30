@@ -42,7 +42,7 @@ export default function ProductProcess({ navigation, route }) {
                         buttonStyle={globalStyles.btn}
                         containerStyle={globalStyles.btnContainer}
                         titleStyle={globalStyles.btnTitle}
-                        onPress={() => navigation.navigate('image-browser')} />
+                        onPress={() => navigation.navigate('image-browser', {item})} />
                 </View>
             </ScrollView>
         </ImageBackground>
