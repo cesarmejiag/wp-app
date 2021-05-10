@@ -1,12 +1,21 @@
 import React, {useState}from 'react'
-import globalStyles from 'utils/styles'
 import { StyleSheet, Image, Button, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import { Divider } from 'react-native-elements'
 import Formatter from '../../utils/Formatter';
 import GridList from 'react-native-grid-list';
+import ModalManipulator from '../../components/Crop/ModalManipulator';
 
 function EditImage({ route, navigation }) {
 
+    const [stateCrop, setStateCrop] = useState({
+        photoToManipulate: {
+          width: 0,
+          height: 0,
+          uri: null, 
+          id: 0
+        },
+        isVisible: false,
+      });
     const [isFullPic, setSelection] = useState(true);
     const { photos, item } = route.params;
 
@@ -25,19 +34,37 @@ function EditImage({ route, navigation }) {
         alert('Button');
     }
 
-    const handlePressImage = (item) => {
-        if (item.thumbnail)
-            alert(item.thumbnail.uri);
-        else
-            alert(item);
+    const onToggleModal = () => {
+        const { isVisible } = stateCrop;
+        setStateCrop({ isVisible: !isVisible });
     }
 
-    // const d = photos.map(p => p.uri);
-    // console.log(d);
-    const d = photos.map(p => p.uri);
+    const handlePressImage = (item) => {
+        if (item.photo)
+            setStateCrop({
+                photoToManipulate: {
+                  width: item.photo.width,
+                  height: item.photo.height,
+                  uri: item.photo.uri,
+                  id: item.photo.id
+                },
+                isVisible : true
+            });
+        else
+        setStateCrop({
+            photoToManipulate: {
+              width: item.width,
+              height: item.height,
+              uri: item.uri,
+              id: item.id
+            },
+            isVisible : true
+        });
+    }
+
     const items = [];
-    d.forEach(element => {
-        items.push({ thumbnail: { uri: element } });
+    photos.forEach(photo => {
+        items.push({ thumbnail: { uri: photo.uri }, photo });
     });
 
     const renderItem = ({ item, index }) => (
@@ -48,7 +75,6 @@ function EditImage({ route, navigation }) {
 
     return(
         <>
-            {/* <Text>{item.name}</Text> */}
             <Divider style={styles.divider} />
             <View style={styles.priceBar}>
                 <Text>{Formatter.currency(item.sale_price)}</Text>  
@@ -62,7 +88,7 @@ function EditImage({ route, navigation }) {
                 </TouchableOpacity>
                 
                 <TouchableOpacity style={styles.button} onPress={handlePressCollage}>
-                <View style={styles.buttonContetn}>
+                    <View style={styles.buttonContetn}>
                         <Text>Collage</Text>
                     </View>
                     {!isFullPic ? <Divider style={styles.dividerButton} /> : <></>}
@@ -71,10 +97,7 @@ function EditImage({ route, navigation }) {
             {isFullPic ? 
                 <ScrollView style={styles.scroll} contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>
                     {photos.map((photo, id) => (
-                        <TouchableOpacity key={id} style={styles.contentImage} onPress={() => handlePressImage(photo.uri)}>
-                            {/* <View  >
-                                <Image style={styles.image} source={{ uri: photo.uri}} />
-                            </View> */}
+                        <TouchableOpacity key={id} style={styles.contentImage} onPress={() => handlePressImage(photo)}>
                             <Image style={styles.image} source={{ uri: photo.uri}} />
                         </TouchableOpacity>
                     ))}
@@ -97,6 +120,35 @@ function EditImage({ route, navigation }) {
                     </View>
                 </TouchableOpacity>
             </View>
+
+
+            {stateCrop.photoToManipulate && stateCrop.photoToManipulate.uri &&
+            <ModalManipulator 
+                photo={ stateCrop.photoToManipulate }
+                isVisible={ stateCrop.isVisible }
+                onToggleModal={ onToggleModal }
+                onPictureChoosed={(data) => {
+                    photos.forEach(photo => {
+                        if (photo.id == data.photo.id) {
+                            photo.uri = data.photo.uri;
+                            photo.width = data.photo.width;
+                            photo.height = data.photo.height;
+                        }
+                    });
+                    items.forEach(photo => {
+                        if (photo.id == data.photo.id) {
+                            photo.uri = data.photo.uri;
+                            photo.width = data.photo.width;
+                            photo.height = data.photo.height;
+                        }
+                    });
+                }}
+                btnTexts={{
+                done: 'Ok',
+                crop: 'Cortar',
+                processing: 'Processando',
+                }}
+            />}
         </>
     );
 }
