@@ -4,6 +4,9 @@ import { Divider } from 'react-native-elements'
 import Formatter from '../../utils/Formatter';
 import GridList from 'react-native-grid-list';
 import ModalManipulator from '../../components/Crop/ModalManipulator';
+import OpenPay from '../../utils/OpenPay';
+import { createDeviceSessionId } from 'openpay-react-native';
+
 
 function EditImage({ route, navigation }) {
 
@@ -29,9 +32,23 @@ function EditImage({ route, navigation }) {
         setSelection(false);
     }
 
-    const handlePressButton = (e) => {
+    const handlePressButton = async(e) => {
         e.preventDefault();
-        alert('Button');
+
+        const bodyCard = {
+            "card_number":"4111111111111111",
+            "holder_name":"Juan Perez Ramirez",
+            "expiration_year":"22",
+            "expiration_month":"12",
+            "cvv2":"110",
+        }
+
+        OpenPay.createToken(bodyCard).then(res => {
+            const deviceSessionId = createDeviceSessionId();
+            console.log('deviceSessionId', deviceSessionId);
+            console.log('token', res);
+            alert(` deviceSessionId: ${deviceSessionId} \n tokenId: ${res.id}`);
+        });
     }
 
     const onToggleModal = () => {
