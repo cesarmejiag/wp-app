@@ -7,7 +7,7 @@ import globalStyles from './../../utils/styles'
 import useCart from './../../hooks/useCart';
 
 export default function CartScreen({ navigation }) {
-    const { cartItems, cartTotal, addToCart, removeFromCart } = useCart();
+    const { cartItems, cartTotal, addToCart, removeFromCart, resetCart } = useCart();
 
     return (
         <ImageBackground
@@ -26,6 +26,12 @@ export default function CartScreen({ navigation }) {
                     containerStyle={globalStyles.btnContainer}
                     titleStyle={globalStyles.btnTitle}
                     onPress={() => { }} />
+                {/* <Button
+                    title="Limpiar"
+                    buttonStyle={globalStyles.btn}
+                    containerStyle={globalStyles.btnContainer}
+                    titleStyle={globalStyles.btnTitle}
+                    onPress={resetCart} /> */}
             </View>
         </ImageBackground>
     );

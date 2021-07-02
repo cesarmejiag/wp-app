@@ -21,7 +21,7 @@ export default function ProductDetail({ navigation, route }) {
     const { description } = item
 
     const onPress = () => {
-        addToCart(item);
+        // addToCart(item);
         navigation.navigate('product-process', { item })
     }
 
@@ -47,7 +47,7 @@ export default function ProductDetail({ navigation, route }) {
                         />
                     </View>
                     <Button
-                        title="Activar"
+                        title="Continuar"
                         buttonStyle={globalStyles.btn}
                         containerStyle={globalStyles.btnContainer}
                         titleStyle={globalStyles.btnTitle}

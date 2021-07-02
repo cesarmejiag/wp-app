@@ -44,56 +44,6 @@ const screenOptions = (route, color = '#3241F0') => {
  * Create Navigation component.
  * @returns {JSX}
  */
-
-//  class Navigation extends React.Component {
-//     static contextType = UserContext
-    
-//     constructor(props) {
-//       super(props);
-      
-//     }
-
-//     componentWillMount() {
-//         this.context.initCredential();
-//     }
-  
-//     render() {
-        
-//         return(
-//         <>
-//             <NavigationContainer>
-//                 <Tab.Navigator
-//                     initialRouteName="profile"
-//                     tabBarOptions={{
-//                         activeTintColor: "#717171",
-//                         activeBackgroundColor: "#ffffff",
-//                         inactiveTintColor: "#717171",
-//                         inactiveBackgroundColor: "#ffffff",
-//                     }}
-//                     screenOptions={({ route }) => ({
-//                         tabBarIcon: ({ color }) => screenOptions(route)
-//                     })}>
-//                     <Tab.Screen
-//                         name="product-list"
-//                         component={ProductStack}
-//                         options={{ title: 'Inicio' }} />
-//                     <Tab.Screen
-//                         name="profile"
-//                         component={ProfileStack}
-//                         //component={UserLogged}
-//                         options={{ title: 'Mi Perfil' }} />
-//                     <Tab.Screen
-//                         name="cart"
-//                         component={CartStack}
-//                         options={{ title: 'Carrito' }} />
-//                 </Tab.Navigator>
-//             </NavigationContainer>
-//             <SnackBar visible={true} textMessage="Hello There!" bottom={50} />
-//         </>)
-//     }
-//   }
-
-//   export default  Navigation;
 export default function Navigation() {
     const {currentUser, initCredential} = useContext(UserContext);
     const {show, message} = useContext(GlobalContext);

@@ -1,4 +1,4 @@
-import React, {useState}from 'react'
+import React, {useState, useContext}from 'react'
 import { StyleSheet, Image, Button, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import { Divider } from 'react-native-elements'
 import Formatter from '../../utils/Formatter';
@@ -6,10 +6,14 @@ import GridList from 'react-native-grid-list';
 import ModalManipulator from '../../components/Crop/ModalManipulator';
 import OpenPay from '../../utils/OpenPay';
 import { createDeviceSessionId } from 'openpay-react-native';
+import GlobalContext from '../../context/Global/GlobalContext';
+import useCart from './../../hooks/useCart';
 
 
 function EditImage({ route, navigation }) {
 
+    const { addToCart } = useCart();
+    const {showAlert} = useContext(GlobalContext);
     const [stateCrop, setStateCrop] = useState({
         photoToManipulate: {
           width: 0,
@@ -45,9 +49,16 @@ function EditImage({ route, navigation }) {
 
         OpenPay.createToken(bodyCard).then(res => {
             const deviceSessionId = createDeviceSessionId();
-            console.log('deviceSessionId', deviceSessionId);
-            console.log('token', res);
-            alert(` deviceSessionId: ${deviceSessionId} \n tokenId: ${res.id}`);
+            // console.log('deviceSessionId', deviceSessionId);
+            // console.log('token', res);
+            // alert(` deviceSessionId: ${deviceSessionId} \n tokenId: ${res.id}`);
+            // showAlert('Articulo alamcenado exitosamente.');
+            addToCart(item);
+            navigation.navigate('cart');
+            // navigation.reset({
+            //     index: 0,
+            //     routes: [{ name: 'cart' }],
+            // });
         });
     }
 
@@ -133,7 +144,7 @@ function EditImage({ route, navigation }) {
             <View style={styles.botonera}>
                 <TouchableOpacity style={styles.marginButton} onPress={handlePressButton}>
                     <View style={styles.btn}>
-                        <Text style={styles.btnTitle}>Listo</Text>
+                        <Text style={styles.btnTitle}>Agregar</Text>
                     </View>
                 </TouchableOpacity>
             </View>

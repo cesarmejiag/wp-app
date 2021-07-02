@@ -49,7 +49,11 @@ const UserState = (props) => {
                 payload: info
             });
             showLoading(false);
-            navigation.navigate('user-logged');
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'user-logged' }],
+            });
+            // navigation.navigate('user-logged');
         } catch (err) { 
             showLoading(false);
             console.log('Can\'t save user credential', err); 
@@ -93,7 +97,11 @@ const UserState = (props) => {
                 payload: null
             });
             showLoading(false);
-            navigation.navigate('profile');
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'profile' }],
+            });
+            // navigation.navigate('profile');
         } catch (err) { 
             showLoading(false);
             console.log('Can\'t clear user credential', err);
